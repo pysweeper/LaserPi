@@ -1,1 +1,14 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+
+h1, h3, form
+{
+  padding: 7px;
+  margin: auto;
+  text-align: center;
+}
+table, th, td
+{
+  border: 1px solid #888888;
+  padding: 7px;
+  margin: auto;
+}
