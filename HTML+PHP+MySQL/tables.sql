@@ -18,7 +18,8 @@ FOREIGN KEY (winner) REFERENCES Guns(gun)
 CREATE TABLE Game_Users (
 game_id INT UNSIGNED,
 gun_id INT UNSIGNED,
-PRIMARY KEY (game_id, gun_id),
+username VARCHAR(255),
+PRIMARY KEY (game_id, gun_id, username),
 FOREIGN KEY (game_id) REFERENCES Games(id),
 FOREIGN KEY (gun_id) REFERENCES Guns(gun)
 );
