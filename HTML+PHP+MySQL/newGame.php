@@ -15,10 +15,14 @@
   if ($result = $mysqli->query($query))
   {
     echo "<p>New Game Successfully Initialized.</p><br>";
+    /* free result set */
+    $result->free();
   }
   else
   {
       echo "<p>Error: Trouble communicating with database, no new game created.</p><br>";
+      echo "<a href='laserpi.php'>Return to homepage?</a>";
+      exit();
   }
 
   echo "<a href='laserpi.php'>Return to homepage?</a>";
