@@ -10,7 +10,7 @@ CREATE TABLE Games (
 id INT UNSIGNED AUTO_INCREMENT,
 current_state INT UNSIGNED,
 winner INT UNSIGNED,
-game_date TIMESTAMP,
+game_date DATETIME,
 PRIMARY KEY (id),
 FOREIGN KEY (winner) REFERENCES Guns(gun)
 );

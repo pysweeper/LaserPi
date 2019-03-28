@@ -11,7 +11,7 @@
       exit();
   }
 
-  $query = "INSERT INTO Games (current_state, winner) VALUES (1, 0)";
+  $query = "INSERT INTO Games (current_state, winner, game_date) VALUES (1, 0, (NOW() - INTERVAL 4 HOUR + INTERVAL 10 MINUTE))";
 
   if ($mysqli->query($query))
   {
