@@ -5,4 +5,4 @@ It's Laser Tag!
 1. Benjamin Wyss
 2. Thomas Smithey
 3. Jon Volden
-4. 
+4. Jeff Kissick
