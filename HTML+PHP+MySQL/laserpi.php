@@ -87,24 +87,26 @@
   echo "</table><br><hr>";
 
   echo "<h3>Game Stats</h3>";
-  echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Gun ID</th><th>Player 2's Gun ID</th><th>Winner</th><th>Game Start Time</th></tr>";
+  echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Username</th><th>Player 1's Gun ID</th><th>Player 2's Username</th><th>Player 2's Gun ID</th><th>Winner's Gun ID</th><th>Game Start Time</th></tr>";
 
-  $query = "SELECT * FROM Guns";
+  $query = "SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id)";
 
   if ($result = $mysqli->query($query))
   {
       /* fetch associative array */
       while ($row = $result->fetch_assoc())
       {
-        if ($row['gun'] != 0)
-        {
-          echo "<tr>";
-          echo "<td>" . $row['gun'] . "</td>";
-          echo "<td>" . $row['wins'] . "</td>";
-          echo "<td>" . $row['losses'] . "</td>";
-          echo "<td>" . $row['shots_fired'] . "</td>";
-          echo "</tr>";
-        }
+        echo "<tr>";
+        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $row['current_state'] . "</td>";
+        echo "<td>" . $row['username'] . "</td>";
+        echo "<td>" . $row['gun_id'] . "</td>";
+        $row = $result->fetch_assoc();
+        echo "<td>" . $row['username'] . "</td>";
+        echo "<td>" . $row['gun_id'] . "</td>";
+        echo "<td>" . $row['winner'] . "</td>";
+        echo "<td>" . $row['game_date'] . "</td>";
+        echo "</tr>";
       }
 
       /* free result set */
