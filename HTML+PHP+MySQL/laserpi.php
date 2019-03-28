@@ -59,5 +59,59 @@
     echo "<input type='submit' value='Terminate Game'>";
   }
 
+  echo "<br><hr><h3>Gun Stats</h3>";
+  echo "<table><tr><th>Gun ID</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th></tr>";
+
+  $query = "SELECT * FROM Guns";
+
+  if ($result = $mysqli->query($query))
+  {
+      /* fetch associative array */
+      while ($row = $result->fetch_assoc())
+      {
+        if ($row['gun'] != 0)
+        {
+          echo "<tr>";
+          echo "<td>" . $row['gun'] . "</td>";
+          echo "<td>" . $row['wins'] . "</td>";
+          echo "<td>" . $row['losses'] . "</td>";
+          echo "<td>" . $row['shots_fired'] . "</td>";
+          echo "</tr>";
+        }
+      }
+
+      /* free result set */
+      $result->free();
+  }
+
+  echo "</table><br><hr>";
+
+  echo "<h3>Game Stats</h3>";
+  echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Gun ID</th><th>Player 2's Gun ID</th><th>Winner</th><th>Game Start Time</th></tr>";
+
+  $query = "SELECT * FROM Guns";
+
+  if ($result = $mysqli->query($query))
+  {
+      /* fetch associative array */
+      while ($row = $result->fetch_assoc())
+      {
+        if ($row['gun'] != 0)
+        {
+          echo "<tr>";
+          echo "<td>" . $row['gun'] . "</td>";
+          echo "<td>" . $row['wins'] . "</td>";
+          echo "<td>" . $row['losses'] . "</td>";
+          echo "<td>" . $row['shots_fired'] . "</td>";
+          echo "</tr>";
+        }
+      }
+
+      /* free result set */
+      $result->free();
+  }
+
+  echo "</table><br><hr>";
+
 
 ?>
