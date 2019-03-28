@@ -98,13 +98,31 @@
       {
         echo "<tr>";
         echo "<td>" . $row['id'] . "</td>";
-        echo "<td>" . $row['current_state'] . "</td>";
+        if ($row['current_state'] == 0)
+        {
+          echo "<td>Finished</td>";
+        }
+        else if ($row['current_state'] == 1)
+        {
+          echo "<td>Waiting for Players to Join</td>";
+        }
+        else if ($row['current_state'] == 2)
+        {
+          echo "<td>In Progress</td>";
+        }
         echo "<td>" . $row['username'] . "</td>";
         echo "<td>" . $row['gun_id'] . "</td>";
         $row = $result->fetch_assoc();
         echo "<td>" . $row['username'] . "</td>";
         echo "<td>" . $row['gun_id'] . "</td>";
-        echo "<td>" . $row['winner'] . "</td>";
+        if ($row['winner'] == 0)
+        {
+          echo "<td>None</td>";
+        }
+        else
+        {
+          echo "<td>" . $row['winner'] . "</td>";
+        }
         echo "<td>" . $row['game_date'] . "</td>";
         echo "</tr>";
       }
