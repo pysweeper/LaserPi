@@ -23,7 +23,7 @@
       {
         $previousRow = $row;
         $row = $result->fetch_assoc();
-        if ($previousRow['username'] == $user or $row['username' == $user])
+        if ($previousRow['username'] == $user or $row['username'] == $user)
         {
           echo "<tr>";
           echo "<td>" . $previousRow['id'] . "</td>";
