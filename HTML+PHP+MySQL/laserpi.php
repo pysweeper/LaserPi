@@ -78,6 +78,7 @@
           echo "<td>" . $row['shots_fired'] . "</td>";
           echo "<td>";
           echo "<form action='gameStats.php' method='POST'>";
+          echo "<input type = 'hidden' name = 'user' value = '" . $row['username'] . "' />";
           echo "<input type='submit' value='Go!'></form>";
           echo "</td></tr>";
         }
