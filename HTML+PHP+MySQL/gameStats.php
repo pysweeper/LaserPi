@@ -10,9 +10,9 @@
       exit();
   }
 
-  echo "<h3>Individual Game Stats for " . $user . ":";
+  echo "<h1>Individual Game Stats for " . $user . ":";
 
-  echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Username</th><th>Player 1's Gun ID</th><th>Player 2's Username</th><th>Player 2's Gun ID</th><th>Winner's Gun ID</th><th>Game Start Time</th></tr>";
+  echo "<br><br><table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Username</th><th>Player 1's Gun ID</th><th>Player 2's Username</th><th>Player 2's Gun ID</th><th>Winner's Gun ID</th><th>Game Start Time</th></tr>";
 
   $query = "SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id)";
 
