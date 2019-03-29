@@ -44,23 +44,23 @@
   {
     echo "<h3>No Game Currently Active</h3>";
     echo "<form action='newGame.php' method='POST'>";
-    echo "<input type='submit' value='Create New Game'>";
+    echo "<input type='submit' value='Create New Game'></form>";
   }
   else if ($game_state == 1)
   {
     echo "<h3>Game Waiting for Player(s) to Join (Game ID =  " . $game_id . ")</h3>";
     echo "<form action='terminateGame.php' method='POST'>";
-    echo "<input type='submit' value='Terminate Game'>";
+    echo "<input type='submit' value='Terminate Game'></form>";
   }
   else if ($game_state == 2)
   {
     echo "<h3>Game Currently In Progress (Game ID =  " . $game_id . ")</h3>";
     echo "<form action='terminateGame.php' method='POST'>";
-    echo "<input type='submit' value='Terminate Game'>";
+    echo "<input type='submit' value='Terminate Game'></form>";
   }
 
   echo "<br><hr><h3>Player Stats</h3>";
-  echo "<table><tr><th>Player Username</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th></tr>";
+  echo "<table><tr><th>Player Username</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th><th>View Stats by Game</tr>";
 
   $query = "SELECT * FROM Players";
 
@@ -76,7 +76,10 @@
           echo "<td>" . $row['wins'] . "</td>";
           echo "<td>" . $row['losses'] . "</td>";
           echo "<td>" . $row['shots_fired'] . "</td>";
-          echo "</tr>";
+          echo "<td>";
+          echo "<form action='gameStats.php' method='POST'>";
+          echo "<input type='submit' value='Go!'></form>";
+          echo "</td></tr>";
         }
       }
 
