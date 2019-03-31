@@ -15,11 +15,20 @@ PRIMARY KEY (id),
 FOREIGN KEY (winner) REFERENCES Guns(gun)
 );
 
+CREATE TABLE Players (
+  username VARCHAR(255),
+  wins INT UNSIGNED,
+  losses INT UNSIGNED,
+  shots_fired INT UNSIGNED,
+  PRIMARY KEY (username)
+);
+
 CREATE TABLE Game_Users (
 game_id INT UNSIGNED,
 gun_id INT UNSIGNED,
 username VARCHAR(255),
 PRIMARY KEY (game_id, gun_id, username),
 FOREIGN KEY (game_id) REFERENCES Games(id),
-FOREIGN KEY (gun_id) REFERENCES Guns(gun)
+FOREIGN KEY (gun_id) REFERENCES Guns(gun),
+FOREIGN KEY (username) REFERENCES Players(username)
 );

@@ -44,22 +44,53 @@
   {
     echo "<h3>No Game Currently Active</h3>";
     echo "<form action='newGame.php' method='POST'>";
-    echo "<input type='submit' value='Create New Game'>";
+    echo "<input type='submit' value='Create New Game'></form>";
   }
   else if ($game_state == 1)
   {
     echo "<h3>Game Waiting for Player(s) to Join (Game ID =  " . $game_id . ")</h3>";
     echo "<form action='terminateGame.php' method='POST'>";
-    echo "<input type='submit' value='Terminate Game'>";
+    echo "<input type='submit' value='Terminate Game'></form>";
   }
   else if ($game_state == 2)
   {
     echo "<h3>Game Currently In Progress (Game ID =  " . $game_id . ")</h3>";
     echo "<form action='terminateGame.php' method='POST'>";
-    echo "<input type='submit' value='Terminate Game'>";
+    echo "<input type='submit' value='Terminate Game'></form>";
   }
 
-  echo "<br><hr><h3>Gun Stats</h3>";
+  echo "<br><hr><h3>Player Stats</h3>";
+  echo "<table><tr><th>Player Username</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th><th>View Stats by Game</tr>";
+
+  $query = "SELECT * FROM Players";
+
+  if ($result = $mysqli->query($query))
+  {
+      /* fetch associative array */
+      while ($row = $result->fetch_assoc())
+      {
+        if ($row['username'] != 'NULL1' and $row['username'] != 'NULL2')
+        {
+          echo "<tr>";
+          echo "<td>" . $row['username'] . "</td>";
+          echo "<td>" . $row['wins'] . "</td>";
+          echo "<td>" . $row['losses'] . "</td>";
+          echo "<td>" . $row['shots_fired'] . "</td>";
+          echo "<td>";
+          echo "<form action='gameStats.php' method='POST'>";
+          echo "<input type = 'hidden' name = 'user' value = '" . $row['username'] . "' />";
+          echo "<input type='submit' value='Go!'></form>";
+          echo "</td></tr>";
+        }
+      }
+
+      /* free result set */
+      $result->free();
+  }
+
+  echo "</table><br><hr>";
+
+  echo "<h3>Gun Stats</h3>";
   echo "<table><tr><th>Gun ID</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th></tr>";
 
   $query = "SELECT * FROM Guns";
@@ -110,14 +141,28 @@
         {
           echo "<td>In Progress</td>";
         }
-        echo "<td>" . $row['username'] . "</td>";
+        if ($row['username'] == 'NULL1' or $row['username'] == 'NULL2')
+        {
+          echo "<td>None</td>";
+        }
+        else
+        {
+          echo "<td>" . $row['username'] . "</td>";
+        }
         echo "<td>" . $row['gun_id'] . "</td>";
         $row = $result->fetch_assoc();
-        echo "<td>" . $row['username'] . "</td>";
+        if ($row['username'] == 'NULL1' or $row['username'] == 'NULL2')
+        {
+          echo "<td>None</td>";
+        }
+        else
+        {
+          echo "<td>" . $row['username'] . "</td>";
+        }
         echo "<td>" . $row['gun_id'] . "</td>";
         if ($row['winner'] == 0)
         {
-          echo "<td>None</td>";
+          echo "<td>No Winner</td>";
         }
         else
         {
