@@ -1,4 +1,4 @@
 # Gun ID file.
-# Change gun id.
+# Change gun id (cannot be 0).
 # Rename file to gunid
 gunid=0
