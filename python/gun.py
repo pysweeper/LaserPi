@@ -12,10 +12,8 @@ class Gun:
           file = open('gunid', 'r+')
           file.seek(87, 0)
           self.id = int(file.readline())
-          print (self.id)
           file.read(9)
           self.username = (file.readline()).rstrip("\n")
-          print (self.username)
           file.close()
         except Exception:
           print("gunid file not found. Please open gunid.dist and follow the written instructions.")
@@ -34,13 +32,13 @@ class Gun:
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
         if (len(myresult) == 0):
-          print("Gun id not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.php to register gun.")
+          print("Gun id not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.html to register a new gun.")
           quit()
         sql = "SELECT * FROM Players WHERE username='" + self.username + "'"
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
         if (len(myresult) == 0):
-          print("Username not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.php to register username.")
+          print("Username not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.html to register a new player.")
           quit()
 
     def fireShot(self):
@@ -61,8 +59,6 @@ class Gun:
       mycursor = mydb.cursor()
       mycursor.execute(sql)
       myresult = mycursor.fetchall()
-      for x in myresult:
-          print (x)
       if (len(myresult) == 0):
         print("Could not find a game to join")
       elif (len(myresult) == 1):
@@ -83,6 +79,30 @@ class Gun:
         print(mycursor.rowcount, "record(s) affected")
 
 
+    def loseGame(self):
+        mydb = connect.connect()
+        sql = "SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id) WHERE Games.current_state = 2 AND Game_Users.gun_id <> " + str(self.id)
+        mycursor = mydb.cursor()
+        mycursor.execute(sql)
+        myresult = mycursor.fetchall()
+        if (len(myresult) == 0):
+          print("Could not find an active game.")
+        else:
+          opponentGun = myresult[0][5]
+          opponentName = myresult[0][6]
+          sql = "UPDATE Players SET losses = losses + 1 WHERE username='" + self.username + "'"
+          mycursor.execute(sql)
+          sql = "UPDATE Players SET wins = wins + 1 WHERE username='" + opponentName + "'"
+          mycursor.execute(sql)
+          sql = "UPDATE Guns SET losses = losses + 1 WHERE gun='" + str(self.id) + "'"
+          mycursor.execute(sql)
+          sql = "UPDATE Guns SET wins = wins + 1 WHERE gun='" + str(opponentGun) + "'"
+          mycursor.execute(sql)
+          sql = "UPDATE Games SET winner = " + str(opponentGun) + ", current_state = 0 WHERE current_state = 2"
+          mycursor.execute(sql)
+          mydb.commit()
+
+
     def dumpGuns(self):
       mydb = connect.connect()
       mycursor = mydb.cursor()
@@ -93,4 +113,5 @@ class Gun:
 
 x = Gun()
 x.readIDFile()
-x.fireShot()
+x.joinGame()
+x.loseGame()
