@@ -50,6 +50,6 @@
     echo "<p>Second Player Slot Created Successfully</p><br>";
   }
 
-  echo "<a href='laserpi.php'>Return to homepage?</a>";
+  echo "<a href='laserpi.html'>Return to homepage?</a>";
 
 ?>

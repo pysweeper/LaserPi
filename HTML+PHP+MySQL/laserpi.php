@@ -88,7 +88,13 @@
       $result->free();
   }
 
-  echo "</table><br><hr>";
+  echo "</table><br>";
+
+  echo "<form action='createPlayer.html' method='POST'><input type='submit' value='Register New Player'></form>";
+
+  echo "<hr>";
+
+
 
   echo "<h3>Gun Stats</h3>";
   echo "<table><tr><th>Gun ID</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th></tr>";
@@ -115,7 +121,11 @@
       $result->free();
   }
 
-  echo "</table><br><hr>";
+  echo "</table><br>";
+
+  echo "<form action='registerGun.php' method='POST'><input type='submit' value='Register New Gun'></form>";
+
+  echo "<hr>";
 
   echo "<h3>Game Stats</h3>";
   echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Username</th><th>Player 1's Gun ID</th><th>Player 2's Username</th><th>Player 2's Gun ID</th><th>Winner's Gun ID</th><th>Game Start Time</th></tr>";
