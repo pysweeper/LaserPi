@@ -35,11 +35,22 @@ class Gun:
         myresult = mycursor.fetchall()
         if (len(myresult) == 0):
           print("Gun id not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.php to register gun.")
+          quit()
+        sql = "SELECT * FROM Players WHERE username='" + self.username + "'"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchall()
+        if (len(myresult) == 0):
+          print("Username not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.php to register username.")
+          quit()
 
     def fireShot(self):
       mydb = connect.connect()
       sql = "UPDATE Guns SET shots_fired = shots_fired + 1 WHERE gun = " + str(self.id)
       mycursor = mydb.cursor()
+      mycursor.execute(sql)
+      mydb.commit()
+      print(mycursor.rowcount, "record(s) affected")
+      sql = "UPDATE Players SET shots_fired = shots_fired + 1 WHERE username='" + self.username + "'"
       mycursor.execute(sql)
       mydb.commit()
       print(mycursor.rowcount, "record(s) affected")
@@ -56,7 +67,7 @@ class Gun:
         print("Could not find a game to join")
       elif (len(myresult) == 1):
         gameid = myresult[0][0]
-        sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + " WHERE gun_id = 0 AND username = 'NULL2' AND game_id = " + str(gameid)
+        sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL2' AND game_id = " + str(gameid)
         mycursor.execute(sql)
         mydb.commit()
         print(mycursor.rowcount, "record(s) affected")
@@ -66,7 +77,7 @@ class Gun:
         print(mycursor.rowcount, "record(s) affected")
       elif (len(myresult) == 2):
         gameid = myresult[0][0]
-        sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + " WHERE gun_id = 0 AND username = 'NULL1' AND game_id = " + str(gameid)
+        sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL1' AND game_id = " + str(gameid)
         mycursor.execute(sql)
         mydb.commit()
         print(mycursor.rowcount, "record(s) affected")
@@ -82,3 +93,4 @@ class Gun:
 
 x = Gun()
 x.readIDFile()
+x.fireShot()
