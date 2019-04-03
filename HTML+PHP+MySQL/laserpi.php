@@ -128,7 +128,7 @@
   echo "<hr>";
 
   echo "<h3>Game Stats</h3>";
-  echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Username</th><th>Player 1's Gun ID</th><th>Player 2's Username</th><th>Player 2's Gun ID</th><th>Winner's Gun ID</th><th>Game Start Time</th></tr>";
+  echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player 1's Username</th><th>Player 1's Gun ID</th><th>Player 2's Username</th><th>Player 2's Gun ID</th><th>Winner</th><th>Game Start Time</th></tr>";
 
   $query = "SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id)";
 
@@ -160,6 +160,10 @@
           echo "<td>" . $row['username'] . "</td>";
         }
         echo "<td>" . $row['gun_id'] . "</td>";
+
+        $player1 = $row['username'];
+        $player1Gun = $row['gun_id'];
+
         $row = $result->fetch_assoc();
         if ($row['username'] == 'NULL1' or $row['username'] == 'NULL2')
         {
@@ -176,7 +180,15 @@
         }
         else
         {
-          echo "<td>" . $row['winner'] . "</td>";
+          if ($row['winner'] == $player1Gun)
+          {
+            echo "<td>" . $player1 . "</td>";
+          }
+          else
+          {
+            echo "<td>" . $row['username'] . "</td>";
+          }
+
         }
         echo "<td>" . $row['game_date'] . "</td>";
         echo "</tr>";
@@ -190,3 +202,4 @@
 
 
 ?>
+
