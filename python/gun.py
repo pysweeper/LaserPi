@@ -61,6 +61,7 @@ class Gun:
       myresult = mycursor.fetchall()
       if (len(myresult) == 0):
         print("Could not find a game to join")
+        return False;
       elif (len(myresult) == 1):
         gameid = myresult[0][0]
         sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL2' AND game_id = " + str(gameid)
@@ -71,12 +72,14 @@ class Gun:
         mycursor.execute(sql)
         mydb.commit()
         print(mycursor.rowcount, "record(s) affected")
+        return True
       elif (len(myresult) == 2):
         gameid = myresult[0][0]
         sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL1' AND game_id = " + str(gameid)
         mycursor.execute(sql)
         mydb.commit()
         print(mycursor.rowcount, "record(s) affected")
+        return True
 
 
     def loseGame(self):
@@ -111,7 +114,8 @@ class Gun:
       for x in myresult:
         print(x)
 
-x = Gun()
-x.readIDFile()
-x.joinGame()
-x.loseGame()
+if __name__ == "__main__":
+  x = Gun()
+  x.readIDFile()
+  x.joinGame()
+  x.loseGame()
