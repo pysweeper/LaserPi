@@ -72,7 +72,7 @@ class Gun:
         print(mycursor.rowcount, "record(s) affected")
 
 
-    def dumpGuns():
+    def dumpGuns(self):
       mydb = connect.connect()
       mycursor = mydb.cursor()
       mycursor.execute("SELECT * FROM Guns")
