@@ -7,9 +7,9 @@ from gun import Gun
 class Trigger:
 
   def __init__(self):
-    self.TRIGGER=2
     self.gun = Gun()
     self.gun.readIDFile()
+    self.TRIGGER=self.gun.id
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(self.TRIGGER, GPIO.IN)
   
@@ -17,7 +17,7 @@ class Trigger:
     if GPIO.input(pin) == GPIO.LOW:
       print(str(datetime.datetime.now()), "Shot")
       self.gun.fireShot()
-      call(["irsend","SEND_ONCE","laserpi","Shot02"])
+      call(["irsend","SEND_ONCE","laserpi","Shot01"])
   
   def addTrigger(self):
     GPIO.add_event_detect(self.TRIGGER, GPIO.FALLING, callback=self.shoot, bouncetime=50)
