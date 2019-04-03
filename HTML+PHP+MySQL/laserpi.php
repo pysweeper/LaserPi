@@ -90,7 +90,7 @@
 
   echo "</table><br>";
 
-  echo "<form action='createPlayer.html' method='POST'><input type='submit' value='Register New Player'></form>";
+  echo "<form action='createPlayer.html' method='GET'><input type='submit' value='Register New Player'></form>";
 
   echo "<hr>";
 
