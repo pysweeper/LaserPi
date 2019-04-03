@@ -1,0 +1,34 @@
+<!-- AJAX autorefresh script based on https://stackoverflow.com/questions/47977325/php-auto-refresh-data-in-html -->
+<html>
+  <head>
+    <title>LaserPi</title>
+  </head>
+  <body>
+    <div class="container" id="output"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function()
+    {
+      function getData()
+      {
+        $.ajax(
+        {
+          type: 'POST',
+          url: 'laserpi.php',
+          success: function(data)
+          {
+            $('#output').html(data);
+          }
+        });
+      }
+      getData();
+      setInterval(function ()
+      {
+        getData();
+      }, 1000);  // it will refresh your data every 1 sec
+
+    });
+  </script>
+  </body>
+</html>
+
