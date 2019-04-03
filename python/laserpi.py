@@ -13,7 +13,7 @@ try:
   trigger.addTrigger()
   gun = Gun()
   gun.readIDFile()
-  inGame = True
+  inGame = False
   while True:
     while not inGame:
       joined = gun.joinGame()
@@ -26,6 +26,9 @@ try:
         #we got hit by something
         print("Got hit by " + str(code))
         gun.loseGame()
+        inGame=False
+      stillActive = gun.checkGame()
+      if stillActive == False:
         inGame=False
       sleep(0.1)
   
