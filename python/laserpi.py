@@ -9,10 +9,8 @@ prog="guns"
 
 try:
   sockid = lirc.init(prog,blocking=False)
-  #register trigers
   trigger = Trigger()
   trigger.addTrigger()
-  #look for game
   gun = Gun()
   gun.readIDFile()
   inGame = True
@@ -23,7 +21,6 @@ try:
         inGame = True
       sleep(0.1)
     while inGame:
-      #listen for hits
       code=lirc.nextcode()
       if code and code[0] != "Shot"+str(gun.id).zfill(2):
         #we got hit by something
@@ -33,5 +30,4 @@ try:
       sleep(0.1)
   
 finally:
-  #clean up triggers.
   trigger.deleteTrigger()
