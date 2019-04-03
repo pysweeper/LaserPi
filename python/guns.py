@@ -1,22 +1,27 @@
 import connect
 
 id = 0
+username = "None"
 
-#Read the gun id from the text file 'gunid''
-try:
-  file = open('gunid', 'rb+')
-  file.seek(-2, 2)
-  id = int(file.read(1))
-  file.close()
-except Exception:
-  print("Gun not registered. Please open gunid.dist and follow the written instructions.")
-  quit()
+def readIDFile():
+    #Read the gun id from the text file 'gunid''
+    try:
+      file = open('gunid', 'r+')
+      file.seek(87, 0)
+      id = int(file.readline())
+      print (id)
+      file.read(9)
+      username = (file.readline()).rstrip("\n")
+      print (username)
+      file.close()
+    except Exception:
+      print("Gun/User not registered. Please open gunid.dist and follow the written instructions.")
+      quit()
 
-#Gunid 0 is reserved for the database's NULL gun
-if (id == 0):
-  print("Gun id cannot be 0. Please open gunid.dist and follow the written instructions.")
-  quit()
-
+    #Gunid 0 is reserved for the database's NULL gun
+    if (id == 0):
+      print("Gun id cannot be 0. Please open gunid.dist and follow the written instructions.")
+      quit()
 
 def fireShot():
   mydb = connect.connect()
@@ -62,5 +67,4 @@ def dumpGuns():
   for x in myresult:
     print(x)
 
-dumpGuns()
-joinGame()
+readIDFile()
