@@ -79,7 +79,7 @@ class Gun:
         sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL1' AND game_id = " + str(gameid)
         mycursor.execute(sql)
         mydb.commit()
-        print(str(datetime.datetime.now()), "Game_Users updated (NULL2): ", mycursor.rowcount, "record(s) affected")
+        print(str(datetime.datetime.now()), "Game_Users updated (NULL1): ", mycursor.rowcount, "record(s) affected")
         return True
 
     def checkGame(self):
