@@ -1,4 +1,5 @@
 #imports
+import os, datetime, time
 from gun import Gun
 from trigger import Trigger
 import lirc
@@ -19,12 +20,12 @@ try:
       joined = gun.joinGame()
       if joined:
         inGame = True
-      sleep(0.1)
+      sleep(0.5)
     while inGame:
       code=lirc.nextcode()
       if code and code[0] != "Shot"+str(gun.id).zfill(2):
         #we got hit by something
-        print("Got hit by " + str(code))
+        print(str(datetime.datetime.now()), "Got hit by " + str(code))
         gun.loseGame()
         inGame=False
       stillActive = gun.checkGame()

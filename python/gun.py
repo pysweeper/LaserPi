@@ -1,4 +1,5 @@
 import connect
+import os, datetime, time
 
 class Gun:
 
@@ -47,11 +48,11 @@ class Gun:
       mycursor = mydb.cursor()
       mycursor.execute(sql)
       mydb.commit()
-      print(mycursor.rowcount, "record(s) affected")
+      print(str(datetime.datetime.now()), "Gun shots updated: ", mycursor.rowcount, "record(s) affected")
       sql = "UPDATE Players SET shots_fired = shots_fired + 1 WHERE username='" + self.username + "'"
       mycursor.execute(sql)
       mydb.commit()
-      print(mycursor.rowcount, "record(s) affected")
+      print(str(datetime.datetime.now()), "Player shot updated: ", mycursor.rowcount, "record(s) affected")
 
     def joinGame(self):
       mydb = connect.connect()
@@ -60,25 +61,25 @@ class Gun:
       mycursor.execute(sql)
       myresult = mycursor.fetchall()
       if (len(myresult) == 0):
-        print("Could not find a game to join")
+        print(str(datetime.datetime.now()), "Could not find a game to join")
         return False;
       elif (len(myresult) == 1):
         gameid = myresult[0][0]
         sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL2' AND game_id = " + str(gameid)
         mycursor.execute(sql)
         mydb.commit()
-        print(mycursor.rowcount, "record(s) affected")
+        print(str(datetime.datetime.now()), "Game_Users updated (NULL2): ", mycursor.rowcount, "record(s) affected")
         sql = "UPDATE Games SET current_state = 2 WHERE current_state = 1"
         mycursor.execute(sql)
         mydb.commit()
-        print(mycursor.rowcount, "record(s) affected")
+        print(str(datetime.datetime.now()), "Updated game state: ", mycursor.rowcount, "record(s) affected")
         return True
       elif (len(myresult) == 2):
         gameid = myresult[0][0]
         sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL1' AND game_id = " + str(gameid)
         mycursor.execute(sql)
         mydb.commit()
-        print(mycursor.rowcount, "record(s) affected")
+        print(str(datetime.datetime.now()), "Game_Users updated (NULL2): ", mycursor.rowcount, "record(s) affected")
         return True
 
     def checkGame(self):
@@ -88,7 +89,7 @@ class Gun:
       mycursor.execute(sql)
       myresult = mycursor.fetchall()
       if (len(myresult) == 0):
-        print("Could not find a game to join")
+        print(str(datetime.datetime.now()), "Could not find a game to join")
         return False;
       else:
         return True
@@ -100,7 +101,7 @@ class Gun:
       mycursor.execute(sql)
       myresult = mycursor.fetchall()
       if (len(myresult) == 0):
-        print("Could not find an active game.")
+        print(str(datetime.datetime.now()), "Could not find an active game.")
       else:
         opponentGun = myresult[0][5]
         opponentName = myresult[0][6]
