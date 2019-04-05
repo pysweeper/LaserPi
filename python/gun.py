@@ -56,7 +56,7 @@ class Gun:
 
     def joinGame(self):
       mydb = connect.connect()
-      sql = "SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id) WHERE Games.current_state = 1 AND Game_Users.gun_id = 0"
+      sql = "SELECT * FROM Games WHERE current_state = 1"
       mycursor = mydb.cursor()
       mycursor.execute(sql)
       myresult = mycursor.fetchall()
@@ -65,21 +65,10 @@ class Gun:
         return False;
       elif (len(myresult) == 1):
         gameid = myresult[0][0]
-        sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL2' AND game_id = " + str(gameid)
+        sql = "INSERT INTO Game_Users (game_id, gun_id, username) VALUES ("+str(gameid)+", "+str(self.id)+", '"+self.username+"')"
         mycursor.execute(sql)
         mydb.commit()
-        print(str(datetime.datetime.now()), "Game_Users updated (NULL2): ", mycursor.rowcount, "record(s) affected")
-        sql = "UPDATE Games SET current_state = 2 WHERE current_state = 1"
-        mycursor.execute(sql)
-        mydb.commit()
-        print(str(datetime.datetime.now()), "Updated game state: ", mycursor.rowcount, "record(s) affected")
-        return True
-      elif (len(myresult) == 2):
-        gameid = myresult[0][0]
-        sql = "UPDATE Game_Users SET gun_id = " + str(self.id) + ", username='" + self.username + "' WHERE gun_id = 0 AND username = 'NULL1' AND game_id = " + str(gameid)
-        mycursor.execute(sql)
-        mydb.commit()
-        print(str(datetime.datetime.now()), "Game_Users updated (NULL1): ", mycursor.rowcount, "record(s) affected")
+        print(str(datetime.datetime.now()), "Inserted gun data: ", mycursor.rowcount, "record(s) affected")
         return True
 
     def checkGame(self):
