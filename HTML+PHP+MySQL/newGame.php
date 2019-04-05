@@ -24,32 +24,9 @@
       exit();
   }
 
-  $query = "SELECT * FROM Games";
-
-  if ($result = $mysqli->query($query))
-  {
-    while ($row = $result->fetch_assoc())
-    {
-      $gameid = $row['id'];
-    }
-
-    $result->free();
-  }
-
-  $query = "INSERT INTO Game_Users (game_id, gun_id, username) VALUES (" . $gameid . ", 0, 'NULL1')";
-
-  if ($mysqli->query($query))
-  {
-    echo "<p>First Player Slot Created Successfully</p>";
-  }
-
-  $query = "INSERT INTO Game_Users (game_id, gun_id, username) VALUES (" . $gameid . ", 0, 'NULL2')";
-
-  if ($mysqli->query($query))
-  {
-    echo "<p>Second Player Slot Created Successfully</p><br>";
-  }
-
   echo "<a href='laserpi.html'>Return to homepage?</a>";
 
+  header("Location: https://people.eecs.ku.edu/~b040w377/laserpi.html");
+  exit();
 ?>
+
