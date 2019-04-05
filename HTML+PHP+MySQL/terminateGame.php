@@ -23,4 +23,8 @@
 
   echo "<a href='laserpi.html'>Return to homepage?</a>";
 
+  header("Location: https://people.eecs.ku.edu/~b040w377/laserpi.html");
+  exit();
+
 ?>
+

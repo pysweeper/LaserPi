@@ -48,9 +48,9 @@
   }
   else if ($game_state == 1)
   {
-    echo "<h3>Game Waiting for Player(s) to Join (Game ID =  " . $game_id . ")</h3>";
-    echo "<form action='terminateGame.php' method='POST'>";
-    echo "<input type='submit' value='Terminate Game'></form>";
+    echo "<h3>Game Open for Player(s) to Join (Game ID =  " . $game_id . ")</h3>";
+    echo "<form action='startGame.php' method='POST'>";
+    echo "<input type='submit' value='Start Game'></form>";
   }
   else if ($game_state == 2)
   {

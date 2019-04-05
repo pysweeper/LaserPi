@@ -28,6 +28,8 @@
     }
 
     echo "<a href='https://people.eecs.ku.edu/~b040w377/laserpi.html'>Return to homepage?</a>";
+    header("Location: https://people.eecs.ku.edu/~b040w377/laserpi.html");
+    exit();
   }
   else
   {
@@ -35,4 +37,7 @@
     echo "<a href='https://people.eecs.ku.edu/~b040w377/laserpi.html'>Return to homepage?</a>";
   }
 
+
+
 ?>
+
