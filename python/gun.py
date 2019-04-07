@@ -2,13 +2,13 @@ import connect
 import os, datetime, time
 
 class Gun:
-  """ The gun class handles all the guna actions,
+  """ The gun class handles all the gun actions,
     including interactions with the MySQL server.
     The class has no subclasses.
   """
   def __init__(self):
     """ Constructor for the Gun class.
-        Post conditions: The gun will be
+        Postconditions: The gun will be
         active with no id and no username.
     """
     self.id = 0

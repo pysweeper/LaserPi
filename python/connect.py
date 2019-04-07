@@ -1,6 +1,11 @@
 import mysql.connector
 
 def connect():
+  """ connect
+  Precondition: none
+  Postcondition: A connection will be established with the MySQL 
+  database.
+  """
   mydb = mysql.connector.connect(
     host="mysql.eecs.ku.edu",
     user="b040w377",
