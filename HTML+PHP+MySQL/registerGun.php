@@ -1,7 +1,8 @@
 <?php
 
 /**
- *
+ *@pre the user submitted a register new gun form
+ *@post Creates a new gun in the database and redirects the user back to the laserpi homepage
  */
  function registerGun()
  {

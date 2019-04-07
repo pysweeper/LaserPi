@@ -12,7 +12,8 @@
   }
 
  /**
-  *
+  *@pre Database connection successful
+  *@post Writes the header of the laserpi web page, which includes both a title header and a form which can be used to either create, start, or terminate laserpi games based on the database state
   */
   function printHeader()
   {
@@ -67,7 +68,8 @@
   }
 
  /**
-  *
+  *@pre Database connection successful and printHeader is executed
+  *@post Writes a table which displays the recorded stats of every player found in the database along with a form used to create new players
   */
   function printPlayerStats()
   {
@@ -110,7 +112,8 @@
   }
 
  /**
-  *
+  *@pre Database connection successful and printPlayerStats is executed
+  *@post Writes a table which displays all of the stats for each gun in the database along with a form that is used to register new guns
   */
   function printGunStats()
   {
@@ -149,7 +152,8 @@
   }
 
  /**
-  *
+  *@pre Database connection successful and printGunStats is executed
+  *@post Writes a table which contains stats on every game stored in the database
   */
   function printGameStats()
   {

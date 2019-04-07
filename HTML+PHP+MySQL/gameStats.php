@@ -3,7 +3,8 @@
   echo "<style>" . $css . "</style>";
 
  /**
-  *
+  *@pre the user has submitted a view individual game stats form
+  *@post fetches all games from the database with the specified username as a player and writes each game's statistics in a table format
   */
   function printGameStats()
   {
