@@ -3,7 +3,8 @@
   echo "<style>" . $css . "</style>";
 
  /**
-  *
+  *@pre A game has been created using the create game form, and then the user submitted a start game form
+  *@post Sets the previously created game to the active state in the database and redirects the user back to the laserpi homepage
   */
   function startGame()
   {

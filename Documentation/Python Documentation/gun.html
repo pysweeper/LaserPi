@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gun</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>gun</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cjkiss%5Cdocuments%5Claserpi%5Cpython%5Cgun.py">c:\users\jkiss\documents\laserpi\python\gun.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="connect.html">connect</a><br>
+</td><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gun.html#Gun">Gun</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Gun">class <strong>Gun</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;gun&nbsp;class&nbsp;handles&nbsp;all&nbsp;the&nbsp;gun&nbsp;actions,<br>
+including&nbsp;interactions&nbsp;with&nbsp;the&nbsp;MySQL&nbsp;server.<br>
+The&nbsp;class&nbsp;has&nbsp;no&nbsp;subclasses.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Gun-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructor&nbsp;for&nbsp;the&nbsp;<a href="#Gun">Gun</a>&nbsp;class.<br>
+Postconditions:&nbsp;The&nbsp;gun&nbsp;will&nbsp;be<br>
+active&nbsp;with&nbsp;no&nbsp;id&nbsp;and&nbsp;no&nbsp;username.</tt></dd></dl>
+
+<dl><dt><a name="Gun-checkGame"><strong>checkGame</strong></a>(self)</dt><dd><tt>checkGame<br>
+Preconditions:&nbsp;A&nbsp;connection&nbsp;has&nbsp;been&nbsp;established&nbsp;with&nbsp;the&nbsp;<br>
+database.<br>
+checkGame&nbsp;checks&nbsp;the&nbsp;database&nbsp;for&nbsp;an&nbsp;active&nbsp;game.<br>
+Postconditions:&nbsp;If&nbsp;there&nbsp;is&nbsp;no&nbsp;active&nbsp;game&nbsp;a&nbsp;message&nbsp;will&nbsp;be&nbsp;<br>
+displayed&nbsp;stating&nbsp;such.</tt></dd></dl>
+
+<dl><dt><a name="Gun-dumpGuns"><strong>dumpGuns</strong></a>(self)</dt><dd><tt>dumpGuns<br>
+Preconditions:&nbsp;A&nbsp;gunid&nbsp;and&nbsp;user&nbsp;name&nbsp;has&nbsp;been&nbsp;established&nbsp;and&nbsp;<br>
+validated.<br>
+Postcondition:&nbsp;The&nbsp;gunid&nbsp;will&nbsp;be&nbsp;printed&nbsp;to&nbsp;the&nbsp;<br>
+console.</tt></dd></dl>
+
+<dl><dt><a name="Gun-fireShot"><strong>fireShot</strong></a>(self)</dt><dd><tt>fireShot<br>
+Preconditions:&nbsp;a&nbsp;username&nbsp;and&nbsp;gunid&nbsp;have&nbsp;been&nbsp;established&nbsp;for&nbsp;<br>
+the&nbsp;gun,&nbsp;a&nbsp;successful&nbsp;connection&nbsp;with&nbsp;the&nbsp;database<br>
+established,&nbsp;and&nbsp;a&nbsp;game&nbsp;has&nbsp;been&nbsp;joined.<br>
+fireShot&nbsp;updates&nbsp;the&nbsp;database&nbsp;with&nbsp;+&nbsp;1&nbsp;shot&nbsp;each&nbsp;time&nbsp;a&nbsp;shot&nbsp;is&nbsp;<br>
+fired.<br>
+Postconditions:&nbsp;The&nbsp;database&nbsp;will&nbsp;be&nbsp;updated&nbsp;to&nbsp;reflect&nbsp;that&nbsp;<br>
+the&nbsp;user&nbsp;of&nbsp;the&nbsp;gun&nbsp;fired&nbsp;a&nbsp;shot.</tt></dd></dl>
+
+<dl><dt><a name="Gun-joinGame"><strong>joinGame</strong></a>(self)</dt><dd><tt>joinGame<br>
+Preconditions:&nbsp;The&nbsp;hardware&nbsp;is&nbsp;working&nbsp;properly&nbsp;and&nbsp;a&nbsp;<br>
+connection&nbsp;to&nbsp;the&nbsp;database&nbsp;has&nbsp;been&nbsp;established.<br>
+joinGame&nbsp;will&nbsp;search&nbsp;for&nbsp;an&nbsp;active&nbsp;game&nbsp;in&nbsp;the&nbsp;database.<br>
+If&nbsp;there&nbsp;is&nbsp;a&nbsp;game&nbsp;to&nbsp;join,&nbsp;it&nbsp;will&nbsp;be&nbsp;joined.<br>
+Postconditions:&nbsp;A&nbsp;game&nbsp;will&nbsp;be&nbsp;joined&nbsp;or&nbsp;a&nbsp;message&nbsp;will<br>
+be&nbsp;displayed&nbsp;that&nbsp;there&nbsp;is&nbsp;no&nbsp;game&nbsp;to&nbsp;join.</tt></dd></dl>
+
+<dl><dt><a name="Gun-loseGame"><strong>loseGame</strong></a>(self)</dt><dd><tt>loseGame<br>
+Preconditions:&nbsp;A&nbsp;game&nbsp;has&nbsp;been&nbsp;joined&nbsp;and&nbsp;a&nbsp;connection&nbsp;to&nbsp;the<br>
+database&nbsp;has&nbsp;been&nbsp;established.&nbsp;&nbsp;<br>
+loseGame&nbsp;updates&nbsp;the&nbsp;database,&nbsp;user&nbsp;and&nbsp;gun&nbsp;id,&nbsp;with&nbsp;a&nbsp;win&nbsp;or&nbsp;a<br>
+loss&nbsp;and&nbsp;updates&nbsp;the&nbsp;other&nbsp;user&nbsp;and&nbsp;gunid&nbsp;accordingly.&nbsp;&nbsp;The&nbsp;game<br>
+will&nbsp;then&nbsp;end.<br>
+Postconditions:&nbsp;The&nbsp;database&nbsp;is&nbsp;updated&nbsp;with&nbsp;the&nbsp;proper&nbsp;stats&nbsp;<br>
+and&nbsp;the&nbsp;game&nbsp;is&nbsp;ended.</tt></dd></dl>
+
+<dl><dt><a name="Gun-readIDFile"><strong>readIDFile</strong></a>(self)</dt><dd><tt>readIDFile<br>
+Preconditions:&nbsp;gunid.dist&nbsp;is&nbsp;readable&nbsp;and&nbsp;the&nbsp;<a href="#Gun">Gun</a><br>
+class&nbsp;has&nbsp;been&nbsp;initialized.&nbsp;&nbsp;All&nbsp;Hardware&nbsp;is&nbsp;working.<br>
+The&nbsp;readIDFile&nbsp;seeks&nbsp;to&nbsp;read&nbsp;the&nbsp;gunid&nbsp;and&nbsp;username<br>
+a&nbsp;seperate&nbsp;definition&nbsp;will&nbsp;then&nbsp;send&nbsp;the&nbsp;id&nbsp;and<br>
+username&nbsp;to&nbsp;the&nbsp;database.<br>
+Postconditions:&nbsp;The&nbsp;gunid&nbsp;and&nbsp;username&nbsp;will&nbsp;be&nbsp;read<br>
+into&nbsp;the&nbsp;program&nbsp;and&nbsp;validated&nbsp;through&nbsp;the&nbsp;database.</tt></dd></dl>
+
+<dl><dt><a name="Gun-validate"><strong>validate</strong></a>(self)</dt><dd><tt>Validate<br>
+Preconditions:&nbsp;readIDfile&nbsp;must&nbsp;have&nbsp;been&nbsp;executed&nbsp;<br>
+successfully&nbsp;and&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;database&nbsp;established.&nbsp;&nbsp;<br>
+Validate&nbsp;seeks&nbsp;to&nbsp;check&nbsp;the&nbsp;username&nbsp;and&nbsp;id&nbsp;obtained&nbsp;from&nbsp;the<br>
+readIDFile&nbsp;with&nbsp;the&nbsp;gunid&nbsp;and&nbsp;username's&nbsp;in&nbsp;the&nbsp;database.&nbsp;<br>
+This&nbsp;does&nbsp;not&nbsp;register&nbsp;the&nbsp;username&nbsp;and&nbsp;gun&nbsp;id,&nbsp;if&nbsp;they&nbsp;aren't<br>
+registered&nbsp;then&nbsp;the&nbsp;username&nbsp;and&nbsp;id&nbsp;will&nbsp;not&nbsp;be&nbsp;validated.<br>
+Postconditions:&nbsp;The&nbsp;gunid&nbsp;and&nbsp;username&nbsp;will&nbsp;be&nbsp;set&nbsp;within&nbsp;the&nbsp;<br>
+database&nbsp;for&nbsp;record&nbsp;keeping.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

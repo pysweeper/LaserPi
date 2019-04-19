@@ -3,7 +3,8 @@
   echo "<style>" . $css . "</style>";
 
  /**
-  *
+  *@pre the user submitted a create new game form
+  *@post Creates a new game in the database and redirects the user back to the laserpi homepage
   */
   function createGame()
   {

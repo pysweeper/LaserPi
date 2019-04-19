@@ -3,7 +3,8 @@
   echo "<style>" . $css . "</style>";
 
  /**
-  *
+  *@pre a game has been started with the start game form, and then the user submits a terminate game form
+  *@post Sets all active games in the database to the finished state without determining a winner. Then, the user is redirected to the laserpi homepage
   */
   function terminateGame()
   {
