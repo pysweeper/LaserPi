@@ -1,6 +1,4 @@
 <?php
-  $css = file_get_contents("laserpi.css");
-  echo "<style>" . $css . "</style>";
 
   $mysqli = new mysqli("mysql.eecs.ku.edu", "b040w377", "Uefai3Ai", "b040w377");
 
@@ -21,7 +19,7 @@
     $game_state = 0;
     $game_id = 0;
 
-    echo "<h1>LaserPi Laser Tag!</h1><hr>";
+    echo "<br><br><main role='main' class='inner cover'><h1 class='display-3'>LaserPi</h1><p class='lead'>An infrared laser tag game that you can play anytime, anywhere</p><hr></main>";
 
     $query = "SELECT * FROM Games";
 
@@ -49,21 +47,27 @@
 
     if ($game_state == 0)
     {
-      echo "<h3>No Game Currently Active</h3>";
+      echo "<div class='jumbotron'>";
+      echo "<h1 class='display-4'>No Game Currently Active</h1>";
+      echo "<p class='lead'>Click the button below to initialize a new game and get started</p>";
       echo "<form action='newGame.php' method='POST'>";
-      echo "<input type='submit' value='Create New Game'></form>";
+      echo "<input type='submit' class='btn btn-light' value='Create New Game'></form></div>";
     }
     else if ($game_state == 1)
     {
-      echo "<h3>Game Open for Player(s) to Join (Game ID =  " . $game_id . ")</h3>";
+      echo "<div class='jumbotron'>";
+      echo "<h1 class='display-4'>Game Open for Players to Join</h1>";
+      echo "<p class='lead'>Game ID =  " . $game_id . "</p><p class='lead'>Once all players have joined, click to button below to begin the game";
       echo "<form action='startGame.php' method='POST'>";
-      echo "<input type='submit' value='Start Game'></form>";
+      echo "<input type='submit' class='btn btn-light' value='Start Game'></form></div>";
     }
     else if ($game_state == 2)
     {
-      echo "<h3>Game Currently In Progress (Game ID =  " . $game_id . ")</h3>";
+      echo "<div class='jumbotron'>";
+      echo "<h1 class='display-4'>Game Currently In Progress</h1>";
+      echo "<p class='lead'>Game ID =  " . $game_id . "</p><p class='lead'>If you need to terminate the game early, click the button below";
       echo "<form action='terminateGame.php' method='POST'>";
-      echo "<input type='submit' value='Terminate Game'></form>";
+      echo "<input type='submit' class='btn btn-light' value='Terminate Game'></form></div>";
     }
   }
 
@@ -75,8 +79,7 @@
   {
     global $mysqli;
 
-    echo "<br><hr><h3>Player Stats</h3>";
-    echo "<table><tr><th>Player Username</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th><th>View Stats by Game</tr>";
+    echo "<br><hr><h1 class='display-4'>Player Stats</h1><br>";
 
     $query = "SELECT * FROM Players";
 
@@ -87,16 +90,17 @@
         {
           if ($row['username'] != 'NULL1' and $row['username'] != 'NULL2')
           {
-            echo "<tr>";
-            echo "<td>" . $row['username'] . "</td>";
-            echo "<td>" . $row['wins'] . "</td>";
-            echo "<td>" . $row['losses'] . "</td>";
-            echo "<td>" . $row['shots_fired'] . "</td>";
-            echo "<td>";
+            echo "<div class='card'><h1 class='card-header'>" . $row['username'] . "</h1>";
+            echo "<div class='card-body'><h3 class='card-title'>" . ($row['wins'] + $row['losses']) . " Games Played</h3>";
+            echo "<p class='card-text'> " . $row['wins'] . " Games Won<br>";
+            echo $row['losses'] . " Games Lost<br>";
+            echo $row['shots_fired'] . " Shots Fired<br><br>";
+            echo number_format(($row['wins'] / ($row['wins'] + $row['losses']) * 100), 2) . "% Winrate<br>";
+            echo number_format(($row['wins'] / $row['shots_fired'] * 100), 2) . "% Accuracy<br></p>";
             echo "<form action='gameStats.php' method='POST'>";
             echo "<input type = 'hidden' name = 'user' value = '" . $row['username'] . "' />";
-            echo "<input type='submit' value='Go!'></form>";
-            echo "</td></tr>";
+            echo "<input type='submit' class='btn btn-light' value='View Individual Game Stats'></form>";
+            echo "</div></div><br>";
           }
         }
 
@@ -104,9 +108,7 @@
         $result->free();
     }
 
-    echo "</table><br>";
-
-    echo "<form action='createPlayer.html' method='GET'><input type='submit' value='Register New Player'></form>";
+    echo "<form action='createPlayer.html' method='GET'><input type='submit' class='btn btn-light' value='Register New Player'></form>";
 
     echo "<hr>";
   }
@@ -119,8 +121,7 @@
   {
     global $mysqli;
 
-    echo "<h3>Gun Stats</h3>";
-    echo "<table><tr><th>Gun ID</th><th>Game Wins</th><th>Game Losses</th><th>Total Shots Fired</th></tr>";
+    echo "<h1 class='display-4'>Gun Stats</h1><br>";
 
     $query = "SELECT * FROM Guns";
 
@@ -131,12 +132,14 @@
         {
           if ($row['gun'] != 0)
           {
-            echo "<tr>";
-            echo "<td>" . $row['gun'] . "</td>";
-            echo "<td>" . $row['wins'] . "</td>";
-            echo "<td>" . $row['losses'] . "</td>";
-            echo "<td>" . $row['shots_fired'] . "</td>";
-            echo "</tr>";
+            echo "<div class='card'><h1 class='card-header'>Gun #" . $row['gun'] . "</h1>";
+            echo "<div class='card-body'><h3 class='card-title'>" . ($row['wins'] + $row['losses']) . " Games Played</h3>";
+            echo "<p class='card-text'> " . $row['wins'] . " Games Won<br>";
+            echo $row['losses'] . " Games Lost<br>";
+            echo $row['shots_fired'] . " Shots Fired<br><br>";
+            echo number_format(($row['wins'] / ($row['wins'] + $row['losses']) * 100), 2) . "% Winrate<br>";
+            echo number_format(($row['wins'] / $row['shots_fired'] * 100), 2) . "% Accuracy<br></p>";
+            echo "</div></div><br>";
           }
         }
 
@@ -146,7 +149,7 @@
 
     echo "</table><br>";
 
-    echo "<form action='registerGun.php' method='POST'><input type='submit' value='Register New Gun'></form>";
+    echo "<form action='registerGun.php' method='POST'><input type='submit' class='btn btn-light' value='Register New Gun'></form>";
 
     echo "<hr>";
   }
@@ -159,8 +162,7 @@
   {
     global $mysqli;
 
-    echo "<h3>Game Stats</h3>";
-    echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player Usernames</th><th>Player Gun IDs</th><th>Winner</th><th>Game Start Time</th></tr>";
+    echo "<h1 class='display-4'>Game Stats</h1><br>";
 
     $query = "SELECT * FROM Games";
     $numGames = 0;
@@ -187,26 +189,22 @@
           {
             if ($row = $result->fetch_assoc())
             {
-              echo "<tr>";
-              echo "<td>" . $row['id'] . "</td>";
+              echo "<div class='card'><h1 class='card-header'>Game #" . $row['id'] . "</h1>";
+              echo "<div class='card-body'><h3 class='card-title'>";
               if ($row['current_state'] == 0)
               {
-                echo "<td>Finished</td>";
+                echo "Finished";
               }
               else if ($row['current_state'] == 1)
               {
-                echo "<td>Waiting for Players to Join</td>";
+                echo "Waiting for Players to Join";
               }
               else if ($row['current_state'] == 2)
               {
-                echo "<td>In Progress</td>";
+                echo "In Progress";
               }
-
-              echo "<td>None</td>";
-              echo "<td>None</td>";
-              echo "<td>No Winner</td>";
-              echo "<td>" . $row['game_date'] . "</td>";
-              echo "</tr>";
+              echo "</h3><p class='card-text'>Players: None<br>Gun IDs: None<br> Winner: No Winner<br><br>Game Start Time: " . $row['game_date'];
+              echo "</p></div></div><br>";
             }
 
             /* free result set */
@@ -223,21 +221,21 @@
             array_push($rowArr, $row);
           }
 
-          echo "<tr>";
-          echo "<td>" . $rowArr[0]['id'] . "</td>";
+          echo "<div class='card'><h1 class='card-header'>Game #" . $rowArr[0]['id'] . "</h1>";
+          echo "<div class='card-body'><h3 class='card-title'>";
           if ($rowArr[0]['current_state'] == 0)
           {
-            echo "<td>Finished</td>";
+            echo "Finished";
           }
           else if ($rowArr[0]['current_state'] == 1)
           {
-            echo "<td>Waiting for Players to Join</td>";
+            echo "Waiting for Players to Join";
           }
           else if ($rowArr[0]['current_state'] == 2)
           {
-            echo "<td>In Progress</td>";
+            echo "In Progress";
           }
-          echo "<td>";
+          echo "</h1><p class='card-text'>Players: ";
           for ($j = 0; $j < $numPlayers; $j++)
           {
             echo $rowArr[$j]['username'];
@@ -246,8 +244,7 @@
               echo ", ";
             }
           }
-          echo "</td>";
-          echo "<td>";
+          echo "<br>Gun IDs: ";
           for ($j = 0; $j < $numPlayers; $j++)
           {
             echo $rowArr[$j]['gun_id'];
@@ -256,7 +253,7 @@
               echo ", ";
             }
           }
-          echo "</td>";
+          echo "<br>Winner: ";
           if ($rowArr[0]['winner'] == 0)
           {
             echo "<td>No Winner</td>";
@@ -267,20 +264,21 @@
             {
               if ($row['gun_id'] == $row['winner'])
               {
-                echo "<td>" . $row['username'] . "</td>";
+                echo $row['username'];
               }
             }
           }
 
-          echo "<td>" . $rowArr[0]['game_date'] . "</td>";
-          echo "</tr>";
+          echo "<br><br>Game Start Time: " . $rowArr[0]['game_date'];
+
+          echo "</p></div></div><br>";
 
           $result->free();
         }
       }
     }
 
-    echo "</table><br><hr>";
+    echo "<br><hr>";
   }
 
   printHeader();
@@ -289,4 +287,3 @@
   printGameStats();
 
 ?>
-
