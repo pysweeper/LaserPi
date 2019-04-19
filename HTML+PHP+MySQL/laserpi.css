@@ -1,6 +1,17 @@
-@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
-
-h1, h3, form
+/*Some css properties inspired by: https://getbootstrap.com/docs/4.3/examples/*/
+html, body
+{
+  height: 100%;
+  background-color: #333;
+}
+body
+{
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+  text-shadow: 0 .07rem .1rem rgba(0, 0, 0, .9);
+}
+h1, h3, p, form
 {
   padding: 7px;
   margin: auto;
@@ -11,4 +22,10 @@ table, th, td
   border: 1px solid #888888;
   padding: 7px;
   margin: auto;
+}
+.jumbotron
+{
+  color: #fff;
+  background-color: #333;
+  border: 1px solid #fff;
 }

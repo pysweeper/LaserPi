@@ -16,10 +16,8 @@
         printf("Connect failed: %s\n", $mysqli->connect_error);
         exit();
     }
-
-    echo "<h1>Individual Game Stats for " . $user . ":</h1><br>";
-
-    echo "<table><tr><th>Game ID</th><th>Current State</th><th>Player Usernames</th><th>Player Gun IDs</th><th>Winner</th><th>Game Start Time</th></tr>";
+    echo "<div class='container'>";
+    echo "<br><br><main role='main' class='inner cover'><h1 class='display-3'>Individual Game Stats For " . $user . ":</h1><hr></main>";
 
     $query = "SELECT * FROM Games";
     $numGames = 0;
@@ -56,21 +54,21 @@
           }
           if ($printRow)
           {
-            echo "<tr>";
-            echo "<td>" . $rowArr[0]['id'] . "</td>";
+            echo "<div class='card'><h1 class='card-header'>Game #" . $rowArr[0]['id'] . "</h1>";
+            echo "<div class='card-body'><h3 class='card-title'>";
             if ($rowArr[0]['current_state'] == 0)
             {
-              echo "<td>Finished</td>";
+              echo "Finished";
             }
             else if ($rowArr[0]['current_state'] == 1)
             {
-              echo "<td>Waiting for Players to Join</td>";
+              echo "Waiting for Players to Join";
             }
             else if ($rowArr[0]['current_state'] == 2)
             {
-              echo "<td>In Progress</td>";
+              echo "In Progress";
             }
-            echo "<td>";
+            echo "</h1><p class='card-text'>Players: ";
             for ($j = 0; $j < $numPlayers; $j++)
             {
               echo $rowArr[$j]['username'];
@@ -79,8 +77,7 @@
                 echo ", ";
               }
             }
-            echo "</td>";
-            echo "<td>";
+            echo "<br>Gun IDs: ";
             for ($j = 0; $j < $numPlayers; $j++)
             {
               echo $rowArr[$j]['gun_id'];
@@ -89,7 +86,7 @@
                 echo ", ";
               }
             }
-            echo "</td>";
+            echo "<br>Winner: ";
             if ($rowArr[0]['winner'] == 0)
             {
               echo "<td>No Winner</td>";
@@ -100,13 +97,14 @@
               {
                 if ($row['gun_id'] == $row['winner'])
                 {
-                  echo "<td>" . $row['username'] . "</td>";
+                  echo $row['username'];
                 }
               }
             }
 
-            echo "<td>" . $rowArr[0]['game_date'] . "</td>";
-            echo "</tr>";
+            echo "<br><br>Game Start Time: " . $rowArr[0]['game_date'];
+
+            echo "</p></div></div><br>";
           }
 
           $result->free();
@@ -119,4 +117,3 @@
   printGameStats();
 
 ?>
-
