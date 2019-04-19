@@ -19,7 +19,17 @@
     $game_state = 0;
     $game_id = 0;
 
-    echo "<br><br><main role='main' class='inner cover'><h1 class='display-3'>LaserPi</h1><p class='lead'>An infrared laser tag game that you can play anytime, anywhere</p><hr></main>";
+    echo "<a name='laserpi'></a><nav class='navbar sticky-top'>";
+    echo "<a class='navbar-brand' href='#laserpi'>LaserPi</a>";
+    echo "<a class='nav-link' href='#playgame'>Play</a>";
+    echo "<a class='nav-link' href='#players'>Users</a>";
+    echo "<a class='nav-link' href='#guns'>Guns</a>";
+    echo "<a class='nav-link' href='#games'>Games</a>";
+    echo "</nav>";
+
+
+    echo "<br><br>";
+    echo "<main role='main' class='inner cover'><h1 class='display-3'>LaserPi</h1><p class='lead'>An infrared laser tag game that you can play anytime, anywhere</p><a name='playgame'></a><hr></main>";
 
     $query = "SELECT * FROM Games";
 
@@ -44,6 +54,7 @@
         /* free result set */
         $result->free();
     }
+
 
     if ($game_state == 0)
     {
@@ -79,7 +90,7 @@
   {
     global $mysqli;
 
-    echo "<br><hr><h1 class='display-4'>Player Stats</h1><br>";
+    echo "<a name='players'></a><hr><br><br><h1 class='display-4'>Player Stats</h1><br>";
 
     $query = "SELECT * FROM Players";
 
@@ -108,7 +119,7 @@
         $result->free();
     }
 
-    echo "<form action='createPlayer.html' method='GET'><input type='submit' class='btn btn-light' value='Register New Player'></form>";
+    echo "<a name='guns'></a><form action='createPlayer.html' method='GET'><input type='submit' class='btn btn-light' value='Register New Player'></form>";
 
     echo "<hr>";
   }
@@ -149,7 +160,7 @@
 
     echo "</table><br>";
 
-    echo "<form action='registerGun.php' method='POST'><input type='submit' class='btn btn-light' value='Register New Gun'></form>";
+    echo "<a name='games'></a><form action='registerGun.php' method='POST'><input type='submit' class='btn btn-light' value='Register New Gun'></form>";
 
     echo "<hr>";
   }
