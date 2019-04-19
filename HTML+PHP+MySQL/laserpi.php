@@ -1,6 +1,4 @@
 <?php
-  $css = file_get_contents("laserpi.css");
-  echo "<style>" . $css . "</style>";
 
   $mysqli = new mysqli("mysql.eecs.ku.edu", "b040w377", "Uefai3Ai", "b040w377");
 
@@ -21,7 +19,7 @@
     $game_state = 0;
     $game_id = 0;
 
-    echo "<h1>LaserPi Laser Tag!</h1><hr>";
+    echo "<br><br><main role='main' class='inner cover'><h1 class='display-3'>LaserPi</h1><p class='lead'>An infrared laser tag game that you can play anytime, anywhere</p><hr></main>";
 
     $query = "SELECT * FROM Games";
 
@@ -49,21 +47,22 @@
 
     if ($game_state == 0)
     {
-      echo "<h3>No Game Currently Active</h3>";
+      echo "<div class='jumbotron'>";
+      echo "<h1 class='display-4'>No Game Currently Active</h1>";
       echo "<form action='newGame.php' method='POST'>";
-      echo "<input type='submit' value='Create New Game'></form>";
+      echo "<input type='submit' class='btn btn-light' value='Create New Game'></form></div>";
     }
     else if ($game_state == 1)
     {
       echo "<h3>Game Open for Player(s) to Join (Game ID =  " . $game_id . ")</h3>";
       echo "<form action='startGame.php' method='POST'>";
-      echo "<input type='submit' value='Start Game'></form>";
+      echo "<input type='submit' class='btn btn-light' value='Start Game'></form>";
     }
     else if ($game_state == 2)
     {
       echo "<h3>Game Currently In Progress (Game ID =  " . $game_id . ")</h3>";
       echo "<form action='terminateGame.php' method='POST'>";
-      echo "<input type='submit' value='Terminate Game'></form>";
+      echo "<input type='submit' class='btn btn-light' value='Terminate Game'></form>";
     }
   }
 
@@ -289,4 +288,3 @@
   printGameStats();
 
 ?>
-
