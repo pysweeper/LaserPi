@@ -9,6 +9,7 @@
     $username = $_POST["username"];
     $mysqli = new mysqli("mysql.eecs.ku.edu", "b040w377", "Uefai3Ai", "b040w377");
 
+    echo "<div class='container'>";
     /* check connection */
     if ($mysqli->connect_errno)
     {
@@ -38,6 +39,8 @@
 
     /* close connection */
     $mysqli->close();
+
+    echo "</div>";
   }
 
   createPlayer();
