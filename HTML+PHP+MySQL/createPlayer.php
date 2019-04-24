@@ -1,8 +1,10 @@
 <?php
 
+$css = file_get_contents("laserpi.css");
+echo "<style>" . $css . "html, body {height: 100%;}</style>";
+
  /**
-  *@pre the user has submitted a create player form
-  *@post Registers a new player in the database if the posted username is not blank or a duplicate. Then, either a success or error message is printed 
+  *
   */
   function createPlayer()
   {
@@ -46,4 +48,3 @@
   createPlayer();
 
 ?>
-
