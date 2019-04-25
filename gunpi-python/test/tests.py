@@ -10,23 +10,19 @@ class TestLaserPi(unittest.TestCase):
         pass
 
     def test_connectReturnsInstanceOfMySQLConnection(self):
-        '''
-        Test for connect.py
-        Should return a mysqld object.
-        '''
-        testDB = connect.connect()
-        self.assertIsInstance(testDB, mysql.connector.connection.MySQLConnection)
-        testDB.close()
+      testDB = connect.connect()
+      self.assertIsInstance(testDB, mysql.connector.connection.MySQLConnection)
+      testDB.close()
 
-    def test_validate(self):
-        '''
-        Test for gun.validate()
-        Should ...
-        '''
-        gun = Gun()
-        gun.readIDFile()
-        print(gun.id)
-        pass
+    def test_readIDFileAssignsCorrectValuesFromProperlyFormattedFile(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=Benjamin\n")
+      file.close()
+      gun = Gun()
+      gun.readIDFile()
+      self.assertEqual(gun.id, 3)
+      self.assertEqual(gun.username, "Benjamin")
+
 
 if __name__ == '__main__':
     unittest.main()
