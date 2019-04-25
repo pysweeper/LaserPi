@@ -22,6 +22,9 @@ class LED():
         GPIO.output(self.RED, GPIO.LOW)
         GPIO.output(self.GREEN, GPIO.LOW)
 
+    def __del__(self):
+        GPIO.cleanup()
+
     def setLED(self, color, state):
         """ setLED
             Preconditions: The LED constructor has been called.
@@ -69,4 +72,4 @@ if __name__ == "__main__":
             time.sleep(1)
 
     finally:
-        GPIO.cleanup()
+        pass
