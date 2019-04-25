@@ -44,6 +44,7 @@ class Gun:
       file.close()
     except Exception:
       print("gunid file not found. Please open gunid.dist and follow the written instructions.")
+      file.close()
       return False
     return self.validate()
 
