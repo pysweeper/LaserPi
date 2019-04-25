@@ -43,7 +43,7 @@ class Gun:
       self.username = (file.readline()).rstrip("\n")
       file.close()
     except Exception:
-      print("gunid file not found. Please open gunid.dist and follow the written instructions.")
+      print("{}: gunid file not found. Please open gunid.dist and follow the written instructions.").format(datetime.now())
       quit()
     self.validate()
 
@@ -73,7 +73,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("Username not registered. Please go to {} to register a new player.").format(self.url)
+      print(("Username not registered. Please go to {} to register a new player.").format(self.url))
       quit()
 
   def fireShot(self):
@@ -186,5 +186,7 @@ class Gun:
       print(x)
 
 if __name__ == "__main__":
+  x = Gun()
+  x.validate()
   print("Cannot be ran directly. Run laserpi.py to start the gun program. \n"
         "Or run test/test.py to test modules.")
