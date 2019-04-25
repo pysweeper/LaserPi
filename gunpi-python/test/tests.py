@@ -3,7 +3,6 @@ import sys
 sys.path.append('../')
 import connect
 from gun import Gun
-from led import LED
 import mysql.connector
 
 class TestLaserPi(unittest.TestCase):
@@ -15,6 +14,13 @@ class TestLaserPi(unittest.TestCase):
       self.assertIsInstance(testDB, mysql.connector.connection.MySQLConnection)
       testDB.close()
 
+    def test_readIDFileReturnsFalseFromPoorlyFormattedFile(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification\n")
+      file.close()
+      gun = Gun()
+      self.assertFalse(gun.readIDFile())
+
     def test_readIDFileAssignsCorrectValuesFromProperlyFormattedFile(self):
       file = open('gunid', 'r+')
       file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=Benjamin\n")
@@ -24,9 +30,27 @@ class TestLaserPi(unittest.TestCase):
       self.assertEqual(gun.id, 3)
       self.assertEqual(gun.username, "Benjamin")
 
-    def test_LEDIsToggling(self):
-      led = LED()
-      print(led.toggleLED('green'))
+    def test_validateReturnsFalseWhenIdIs0(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=0\nusername=Benjamin\n")
+      file.close()
+      gun = Gun()
+      self.assertFalse(gun.readIDFile())
+
+    def test_validateReturnsFalseWhenGunIsNotRegistered(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=-1\nusername=Benjamin\n")
+      file.close()
+      gun = Gun()
+      self.assertFalse(gun.readIDFile())
+
+    def test_validateReturnsFalseWhenPlayerIsNotRegistered(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=None\n")
+      file.close()
+      gun = Gun()
+      self.assertFalse(gun.readIDFile())
+
 
 if __name__ == '__main__':
     unittest.main()

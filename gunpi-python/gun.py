@@ -43,8 +43,8 @@ class Gun:
       self.username = (file.readline()).rstrip("\n")
       file.close()
     except Exception:
-      print("{}: gunid file not found. Please open gunid.dist and follow the written instructions.").format(datetime.now())
-      quit()
+      print("gunid file not found. Please open gunid.dist and follow the written instructions.")
+      return False
     self.validate()
 
   def validate(self):
@@ -60,21 +60,22 @@ class Gun:
     """
     if (self.id == 0):
       print("Gun id cannot be 0. Please open gunid.dist and follow the written instructions.")
-      quit()
+      return False
     sql = ("SELECT * FROM Guns "
            "WHERE gun={}").format(self.id)
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("Gun id not registered. Please go to {} to register a new gun.").format(self.url)
-      quit()
+      print(("Gun id not registered. Please go to {} to register a new gun.").format(self.url))
+      return False
     sql = ("SELECT * FROM Players "
            "WHERE username='{}'").format(self.username)
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
       print(("Username not registered. Please go to {} to register a new player.").format(self.url))
-      quit()
+      return False
+    return True
 
   def fireShot(self):
     """ fireShot
@@ -153,7 +154,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("{}: Could not find an active game.").format(datetime.now()) 
+      print("{}: Could not find an active game.").format(datetime.now())
     else:
       opponentGun = myresult[0][5]
       opponentName = myresult[0][6]
