@@ -187,5 +187,7 @@ class Gun:
       print(x)
 
 if __name__ == "__main__":
+  x = Gun()
+  x.validate()
   print("Cannot be ran directly. Run laserpi.py to start the gun program. \n"
         "Or run test/test.py to test modules.")

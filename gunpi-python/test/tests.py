@@ -44,6 +44,13 @@ class TestLaserPi(unittest.TestCase):
       gun = Gun()
       self.assertFalse(gun.readIDFile())
 
+    def test_validateReturnsFalseWhenPlayerIsNotRegistered(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=None\n")
+      file.close()
+      gun = Gun()
+      self.assertFalse(gun.readIDFile())
+
 
 if __name__ == '__main__':
     unittest.main()
