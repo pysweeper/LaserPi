@@ -16,7 +16,7 @@ class TestLaserPi(unittest.TestCase):
 
     def test_readIDFileReturnsFalseFromPoorlyFormattedFile(self):
       file = open('gunid', 'r+')
-      file.write("# User Identification\n")
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=0\nusername=None\n")
       file.close()
       gun = Gun()
       self.assertFalse(gun.readIDFile())
@@ -50,6 +50,13 @@ class TestLaserPi(unittest.TestCase):
       file.close()
       gun = Gun()
       self.assertFalse(gun.readIDFile())
+
+    def test_validateReturnsTrueWhenInputIsProperlyFormatted(self):
+      file = open('gunid', 'r+')
+      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=Benjamin\n")
+      file.close()
+      gun = Gun()
+      self.assertTrue(gun.readIDFile())
 
 
 if __name__ == '__main__':

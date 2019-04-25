@@ -45,7 +45,7 @@ class Gun:
     except Exception:
       print("gunid file not found. Please open gunid.dist and follow the written instructions.")
       return False
-    self.validate()
+    return self.validate()
 
   def validate(self):
     """ Validate
@@ -75,6 +75,7 @@ class Gun:
     if (len(myresult) == 0):
       print(("Username not registered. Please go to {} to register a new player.").format(self.url))
       return False
+    print("True")
     return True
 
   def fireShot(self):
