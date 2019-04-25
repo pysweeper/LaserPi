@@ -93,11 +93,11 @@ class Gun:
            "WHERE gun = '{}'").format(self.id)
     self.cursor.execute(sql)
     self.mydb.commit()
-    print("{}: Gun shots updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount)
+    print(("{}: Gun shots updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount))
     sql = "UPDATE Players SET shots_fired = shots_fired + 1 WHERE username='" + self.username + "'"
     self.cursor.execute(sql)
     self.mydb.commit()
-    print("{}: Player shot updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount)
+    print(("{}: Player shot updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount))
 
   def joinGame(self):
     """ joinGame
@@ -136,7 +136,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("{}: Could not find a game to join").format(datetime.now())
+      print(("{}: Could not find a game to join").format(datetime.now()))
       return False
     else:
       return True
@@ -156,7 +156,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("{}: Could not find an active game.").format(datetime.now())
+      print(("{}: Could not find an active game.").format(datetime.now()))
     else:
       opponentGun = myresult[0][5]
       opponentName = myresult[0][6]

@@ -22,6 +22,10 @@ class Trigger:
     self.gun = Gun()
     self.gun.readIDFile()
     self.shotID = "Shot"+str(self.gun.id).zfill(2)
+
+  def __del__(self):
+    GPIO.remove_event_detect(self.TRIGGER)
+    GPIO.cleanup()
   
   def shoot(self, pin):
     """ shoot
@@ -36,6 +40,7 @@ class Trigger:
       print(str(datetime.datetime.now()), "Shot")
       call(["irsend","SEND_ONCE","laserpi",self.shotID])
       self.gun.fireShot()
+      return true
   
   def addTrigger(self):
     """ addTrigger
@@ -45,15 +50,6 @@ class Trigger:
     """
     GPIO.add_event_detect(self.TRIGGER, GPIO.RISING, callback=self.shoot, bouncetime=50)
   
-  def deleteTrigger(self):
-    """ deleteTrigger
-        Preconditions: A trigger has been added.
-        Postconditions: Event dection for a trigger will be
-        removed.
-    """
-    GPIO.remove_event_detect(self.TRIGGER)
-    GPIO.cleanup()
-  
 if __name__ == "__main__":
   try:
     trigger = Trigger()
@@ -61,4 +57,4 @@ if __name__ == "__main__":
     while True:
       pass
   finally:
-    trigger.deleteTrigger()
+    pass
