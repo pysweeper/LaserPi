@@ -17,6 +17,7 @@ class LED():
         self.REDstate = False
         self.GREENstate = False
         GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         GPIO.setup(self.RED, GPIO.OUT)
         GPIO.setup(self.GREEN, GPIO.OUT)
         GPIO.output(self.RED, GPIO.LOW)
