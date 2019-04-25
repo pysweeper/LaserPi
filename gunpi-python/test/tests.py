@@ -27,6 +27,15 @@ class TestLaserPi(unittest.TestCase):
         gun.readIDFile()
         print(gun.id)
         pass
+		
+		
+	def test_LEDIsToggling
+		'''
+		Test LED toggle should return something
+		'''
+		led = LED()
+		print(led.toggleLED('green'))
+		
 
 if __name__ == '__main__':
     unittest.main()
