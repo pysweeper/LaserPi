@@ -65,9 +65,5 @@ class TestLaserPi(unittest.TestCase):
       gun = Gun()
       self.assertTrue(gun.readIDFile())
 
-    def test_triggerShoot(self):
-      trigger = Trigger()
-      self.assertTrue(trigger.shoot())
-
 if __name__ == '__main__':
     unittest.main()
