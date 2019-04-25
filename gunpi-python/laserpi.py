@@ -43,4 +43,4 @@ try:
       sleep(0.1)
   
 finally:
-  trigger.deleteTrigger()
+  pass
