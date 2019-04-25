@@ -1,5 +1,6 @@
 import connect
-import os, datetime, time
+import os, time
+import datetime
 
 class Gun:
   """ The gun class handles all the gun actions,
@@ -15,6 +16,7 @@ class Gun:
     self.username = "None"
     self.mydb = connect.connect()
     self.cursor = self.mydb.cursor()
+    self.url = "https://people.eecs.ku.edu/~b040w377/laserpi.html"
 
   def readIDFile(self):
     """ readIDFile
@@ -26,7 +28,6 @@ class Gun:
         Postconditions: The gunid and username will be read
         into the program and validated through the database.
     """
-    #Read the gun id from the text file 'gunid'
     try:
       file = open('gunid', 'r+')
       file.seek(87, 0)
@@ -58,14 +59,14 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("Gun id not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.html to register a new gun.")
+      print("Gun id not registered. Please go to {} to register a new gun.").format(self.url)
       quit()
     sql = ("SELECT * FROM Players "
            "WHERE username='{}'").format(self.username)
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("Username not registered. Please go to https://people.eecs.ku.edu/~b040w377/laserpi.html to register a new player.")
+      print("Username not registered. Please go to {} to register a new player.").format(self.url)
       quit()
 
   def fireShot(self):
@@ -82,11 +83,11 @@ class Gun:
            "WHERE gun = '{}'").format(self.id)
     self.cursor.execute(sql)
     self.mydb.commit()
-    print(str(datetime.datetime.now()), "Gun shots updated: ", self.cursor.rowcount, "record(s) affected")
+    print("{}: Gun shots updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount)
     sql = "UPDATE Players SET shots_fired = shots_fired + 1 WHERE username='" + self.username + "'"
     self.cursor.execute(sql)
     self.mydb.commit()
-    print(str(datetime.datetime.now()), "Player shot updated: ", self.cursor.rowcount, "record(s) affected")
+    print("{}: Player shot updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount)
 
   def joinGame(self):
     """ joinGame
@@ -101,7 +102,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print(("{}: Could not find a game to join").format(datetime.datetime.now()))
+      print(("{}: Could not find a game to join").format(datetime.now()))
       return False
     elif (len(myresult) == 1):
       gameid = myresult[0][0]
@@ -109,7 +110,7 @@ class Gun:
              "VALUES ({}, {}, {})").format(gameid, self.id, self.username)
       self.cursor.execute(sql)
       self.mydb.commit()
-      print(("{}: Inserted gun data: {} record(s) affected").format(datetime.datetime.now(), self.cursor.rowcount))
+      print(("{}: Inserted gun data: {} record(s) affected").format(datetime.now(), self.cursor.rowcount))
       return True
 
   def checkGame(self):
@@ -125,7 +126,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("{}: Could not find a game to join").format(datetime.datetime.now())
+      print("{}: Could not find a game to join").format(datetime.now())
       return False
     else:
       return True
@@ -145,7 +146,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print("{}: Could not find an active game.").format(datetime.datetime.now()) 
+      print("{}: Could not find an active game.").format(datetime.now()) 
     else:
       opponentGun = myresult[0][5]
       opponentName = myresult[0][6]
