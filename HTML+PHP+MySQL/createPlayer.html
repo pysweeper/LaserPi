@@ -1,18 +1,20 @@
 <html style="height:100%;">
   <head>
     <link rel="stylesheet" href="laserpi.css">
+    <script src="usernameChecker.js"></script>
   </head>
 
   <body style="height:100%;">
     <div class="container">
       <main role='main' class='inner cover'><h1 class='display-4'>Register New LaserPi Player</h1><hr></main>
-      <form action="createPlayer.php" method="post">
+      <form name="user" action="createPlayer.php" onsubmit="return validateUsername()" method="post">
         Input New Username:&nbsp
         <input type="text" name="username">
         <br><br>
         <input type="submit" class="btn btn-light" value="Create New Player">
       </form>
       <br>
-    </div> 
+    </div>
   </body>
 </html>
+
