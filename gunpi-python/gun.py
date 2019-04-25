@@ -125,7 +125,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print(str(datetime.datetime.now()), "Could not find a game to join")
+      print("{}: Could not find a game to join").format(datetime.datetime.now())
       return False
     else:
       return True
@@ -145,7 +145,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print(str(datetime.datetime.now()), "Could not find an active game.")
+      print("{}: Could not find an active game.").format(datetime.datetime.now()) 
     else:
       opponentGun = myresult[0][5]
       opponentName = myresult[0][6]
