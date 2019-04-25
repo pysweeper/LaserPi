@@ -16,13 +16,15 @@ class TestLaserPi(unittest.TestCase):
 
     def test_readIDFileReturnsFalseFromPoorlyFormattedFile(self):
       file = open('gunid', 'r+')
-      file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=0\nusername=None\n")
+      file.truncate()
+      file.write("not a good file")
       file.close()
       gun = Gun()
       self.assertFalse(gun.readIDFile())
 
     def test_readIDFileAssignsCorrectValuesFromProperlyFormattedFile(self):
       file = open('gunid', 'r+')
+      file.truncate()
       file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=Benjamin\n")
       file.close()
       gun = Gun()
@@ -32,6 +34,7 @@ class TestLaserPi(unittest.TestCase):
 
     def test_validateReturnsFalseWhenIdIs0(self):
       file = open('gunid', 'r+')
+      file.truncate()
       file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=0\nusername=Benjamin\n")
       file.close()
       gun = Gun()
@@ -39,6 +42,7 @@ class TestLaserPi(unittest.TestCase):
 
     def test_validateReturnsFalseWhenGunIsNotRegistered(self):
       file = open('gunid', 'r+')
+      file.truncate()
       file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=-1\nusername=Benjamin\n")
       file.close()
       gun = Gun()
@@ -46,6 +50,7 @@ class TestLaserPi(unittest.TestCase):
 
     def test_validateReturnsFalseWhenPlayerIsNotRegistered(self):
       file = open('gunid', 'r+')
+      file.truncate()
       file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=None\n")
       file.close()
       gun = Gun()
@@ -53,6 +58,7 @@ class TestLaserPi(unittest.TestCase):
 
     def test_validateReturnsTrueWhenInputIsProperlyFormatted(self):
       file = open('gunid', 'r+')
+      file.truncate()
       file.write("# User Identification File.\n# Change gunid and username.\n# Rename file to gunid.\ngunid=3\nusername=Benjamin\n")
       file.close()
       gun = Gun()
