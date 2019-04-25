@@ -3,6 +3,7 @@ import sys
 sys.path.append('../')
 import connect
 from gun import Gun
+from led import LED
 import mysql.connector
 
 class TestLaserPi(unittest.TestCase):
@@ -23,6 +24,9 @@ class TestLaserPi(unittest.TestCase):
       self.assertEqual(gun.id, 3)
       self.assertEqual(gun.username, "Benjamin")
 
+	def test_LEDIsToggling
+	  led = LED()
+	  print(led.toggleLED('green'))
 
 if __name__ == '__main__':
     unittest.main()
