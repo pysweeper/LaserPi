@@ -1,5 +1,5 @@
 # Ignore gunid files
-gunid
+gunpi-python/gunid
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

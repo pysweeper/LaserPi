@@ -18,6 +18,13 @@ class Gun:
     self.cursor = self.mydb.cursor()
     self.url = "https://people.eecs.ku.edu/~b040w377/laserpi.html"
 
+  def __del__(self):
+    """ Destructor for the Gun class.
+        Preconditions: Gun object has fallen out of scope
+        Postconditions: Closes the mysql connection stored in the Gun object
+    """
+    self.mydb.close()
+
   def readIDFile(self):
     """ readIDFile
         Preconditions: gunid.dist is readable and the Gun
@@ -42,13 +49,13 @@ class Gun:
 
   def validate(self):
     """ Validate
-        Preconditions: readIDfile must have been executed 
-        successfully and a connection with the database established.  
+        Preconditions: readIDfile must have been executed
+        successfully and a connection with the database established.
         Validate seeks to check the username and id obtained from the
-        readIDFile with the gunid and username's in the database. 
+        readIDFile with the gunid and username's in the database.
         This does not register the username and gun id, if they aren't
         registered then the username and id will not be validated.
-        Postconditions: The gunid and username will be set within the 
+        Postconditions: The gunid and username will be set within the
         database for record keeping.
     """
     if (self.id == 0):
@@ -71,12 +78,12 @@ class Gun:
 
   def fireShot(self):
     """ fireShot
-        Preconditions: a username and gunid have been established for 
+        Preconditions: a username and gunid have been established for
         the gun, a successful connection with the database
         established, and a game has been joined.
-        fireShot updates the database with + 1 shot each time a shot is 
+        fireShot updates the database with + 1 shot each time a shot is
         fired.
-        Postconditions: The database will be updated to reflect that 
+        Postconditions: The database will be updated to reflect that
         the user of the gun fired a shot.
     """
     sql = ("UPDATE Guns SET shots_fired = shots_fired + 1 "
@@ -91,7 +98,7 @@ class Gun:
 
   def joinGame(self):
     """ joinGame
-        Preconditions: The hardware is working properly and a 
+        Preconditions: The hardware is working properly and a
         connection to the database has been established.
         joinGame will search for an active game in the database.
         If there is a game to join, it will be joined.
@@ -115,10 +122,10 @@ class Gun:
 
   def checkGame(self):
     """ checkGame
-        Preconditions: A connection has been established with the 
+        Preconditions: A connection has been established with the
         database.
         checkGame checks the database for an active game.
-        Postconditions: If there is no active game a message will be 
+        Postconditions: If there is no active game a message will be
         displayed stating such.
     """
     sql = ("SELECT * FROM Games "
@@ -134,11 +141,11 @@ class Gun:
   def loseGame(self):
     """ loseGame
         Preconditions: A game has been joined and a connection to the
-        database has been established.  
+        database has been established.
         loseGame updates the database, user and gun id, with a win or a
         loss and updates the other user and gunid accordingly.  The game
         will then end.
-        Postconditions: The database is updated with the proper stats 
+        Postconditions: The database is updated with the proper stats
         and the game is ended.
     """
     sql = ("SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id) "
@@ -169,9 +176,9 @@ class Gun:
 
   def dumpGuns(self):
     """ dumpGuns
-        Preconditions: A gunid and user name has been established and 
+        Preconditions: A gunid and user name has been established and
         validated.
-        Postcondition: The gunid will be printed to the 
+        Postcondition: The gunid will be printed to the
         console.
     """
     self.cursor.execute("SELECT * FROM Guns")

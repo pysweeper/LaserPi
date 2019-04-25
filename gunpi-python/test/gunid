@@ -1,0 +1,6 @@
+# User Identification File.
+# Change gunid and username.
+# Rename file to gunid.
+gunid=0
+username=None
+
