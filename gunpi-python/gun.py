@@ -111,7 +111,7 @@ class Gun:
         Postconditions: A game will be joined or a message will
         be displayed that there is no game to join.
     """
-    sql = "SELECT * FROM Games WHERE current_state = 1"
+    sql = "SELECT * FROM Games WHERE current_state = 1 OR current_state = 2"
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
@@ -160,6 +160,7 @@ class Gun:
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
       print(("{}: Could not find an active game.").format(datetime.datetime.now()))
+      return False
     else:
       opponentGun = myresult[0][5]
       opponentName = myresult[0][6]
@@ -178,6 +179,7 @@ class Gun:
              "WHERE current_state = 2").format(opponentGun)
       self.cursor.execute(sql)
       self.mydb.commit()
+      return True
 
 
   def dumpGuns(self):
