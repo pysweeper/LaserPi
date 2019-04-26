@@ -76,7 +76,6 @@ class Gun:
     if (len(myresult) == 0):
       print(("Username not registered. Please go to {} to register a new player.").format(self.url))
       return False
-    print("True")
     return True
 
   def fireShot(self):
@@ -93,11 +92,11 @@ class Gun:
            "WHERE gun = '{}'").format(self.id)
     self.cursor.execute(sql)
     self.mydb.commit()
-    print(("{}: Gun shots updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount))
+    print(("{}: Gun shots updated: {} record(s) affected").format(datetime.datetime.now(), self.cursor.rowcount))
     sql = "UPDATE Players SET shots_fired = shots_fired + 1 WHERE username='" + self.username + "'"
     self.cursor.execute(sql)
     self.mydb.commit()
-    print(("{}: Player shot updated: {} record(s) affected").format(datetime.now(), self.cursor.rowcount))
+    print(("{}: Player shot updated: {} record(s) affected").format(datetime.datetime.now(), self.cursor.rowcount))
 
   def joinGame(self):
     """ joinGame
@@ -112,7 +111,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print(("{}: Could not find a game to join").format(datetime.now()))
+      print(("{}: Could not find a game to join").format(datetime.datetime.now()))
       return False
     elif (len(myresult) == 1):
       gameid = myresult[0][0]
@@ -120,7 +119,7 @@ class Gun:
              "VALUES ({}, {}, {})").format(gameid, self.id, self.username)
       self.cursor.execute(sql)
       self.mydb.commit()
-      print(("{}: Inserted gun data: {} record(s) affected").format(datetime.now(), self.cursor.rowcount))
+      print(("{}: Inserted gun data: {} record(s) affected").format(datetime.datetime.now(), self.cursor.rowcount))
       return True
 
   def checkGame(self):
@@ -136,7 +135,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print(("{}: Could not find a game to join").format(datetime.now()))
+      print(("{}: Could not find a game to join").format(datetime.datetime.now()))
       return False
     else:
       return True
@@ -156,7 +155,7 @@ class Gun:
     self.cursor.execute(sql)
     myresult = self.cursor.fetchall()
     if (len(myresult) == 0):
-      print(("{}: Could not find an active game.").format(datetime.now()))
+      print(("{}: Could not find an active game.").format(datetime.datetime.now()))
     else:
       opponentGun = myresult[0][5]
       opponentName = myresult[0][6]

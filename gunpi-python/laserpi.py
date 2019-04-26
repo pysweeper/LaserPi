@@ -15,7 +15,7 @@ try:
   trigger.addTrigger()
   gun = Gun()
   led = LED()
-  if (!gun.readIDFile()) quit()
+  if (not gun.readIDFile()): quit()
   inGame = False
   while True:
     while not inGame:
