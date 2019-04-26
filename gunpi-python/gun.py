@@ -115,8 +115,9 @@ class Gun:
       return False
     elif (len(myresult) == 1):
       gameid = myresult[0][0]
-      sql = ("INSERT INTO Game_Users (game_id, gun_id, username) "
-             "VALUES ({}, {}, {})").format(gameid, self.id, self.username)
+      sql = (("INSERT INTO Game_Users (game_id, gun_id, username) "
+             "VALUES ({}, {}, '{}')").format(gameid, self.id, self.username))
+      print(sql)
       self.cursor.execute(sql)
       self.mydb.commit()
       print(("{}: Inserted gun data: {} record(s) affected").format(datetime.datetime.now(), self.cursor.rowcount))
