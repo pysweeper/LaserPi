@@ -3,7 +3,6 @@ import sys
 sys.path.append('../')
 import connect
 from gun import Gun
-from trigger import Trigger
 import mysql.connector
 
 class TestLaserPi(unittest.TestCase):

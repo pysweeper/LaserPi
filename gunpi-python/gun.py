@@ -37,7 +37,11 @@ class Gun:
     """
     try:
       file = open('gunid', 'r+')
-      file.seek(87, 0)
+      #Windows converts line endings to \r\n, while linux converts line endings to only \n, so this offset ensures the file is read correctly
+      x = 87
+      if os.name =='nt':
+        x = 90
+      file.seek(x, 0)
       self.id = int(file.readline())
       file.read(9)
       self.username = (file.readline()).rstrip("\n")
