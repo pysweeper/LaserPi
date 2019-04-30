@@ -58,7 +58,7 @@ def main():
             i += 1
     print(trigger)
     time.sleep(1)
-    return true
+    return True
 
 def setLED(event, color, ledObject, t):
     ledObject.setLED(color, 'on')
