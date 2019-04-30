@@ -56,7 +56,6 @@ def main():
             time.sleep(0.1)
             print(("{}: Trigger detected.").format(datetime.datetime.now()))
             i += 1
-    print(trigger)
     time.sleep(1)
     return True
 
