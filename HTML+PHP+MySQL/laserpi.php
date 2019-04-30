@@ -107,7 +107,6 @@
             echo $row['losses'] . " Games Lost<br>";
             echo $row['shots_fired'] . " Shots Fired<br><br>";
             echo number_format(($row['wins'] / ($row['wins'] + $row['losses']) * 100), 2) . "% Winrate<br>";
-            echo number_format(($row['wins'] / $row['shots_fired'] * 100), 2) . "% Accuracy<br></p>";
             echo "<form action='gameStats.php' method='POST'>";
             echo "<input type = 'hidden' name = 'user' value = '" . $row['username'] . "' />";
             echo "<input type='submit' class='btn btn-light' value='View Individual Game Stats'></form>";
@@ -149,7 +148,6 @@
             echo $row['losses'] . " Games Lost<br>";
             echo $row['shots_fired'] . " Shots Fired<br><br>";
             echo number_format(($row['wins'] / ($row['wins'] + $row['losses']) * 100), 2) . "% Winrate<br>";
-            echo number_format(($row['wins'] / $row['shots_fired'] * 100), 2) . "% Accuracy<br></p>";
             echo "</div></div><br>";
           }
         }
