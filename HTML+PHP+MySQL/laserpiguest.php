@@ -60,25 +60,21 @@
     {
       echo "<div class='jumbotron'>";
       echo "<h1 class='display-4'>No Game Currently Active</h1>";
-      echo "<p class='lead'>Click the button below to initialize a new game and get started</p>";
-      echo "<form action='newGame.php' method='POST'>";
-      echo "<input type='submit' class='btn btn-light' value='Create New Game'></form></div>";
+      echo "</div>";
     }
     else if ($game_state == 1)
     {
       echo "<div class='jumbotron'>";
       echo "<h1 class='display-4'>Game Open for Players to Join</h1>";
-      echo "<p class='lead'>Game ID =  " . $game_id . "</p><p class='lead'>Once all players have joined, click the button below to begin the game";
-      echo "<form action='startGame.php' method='POST'>";
-      echo "<input type='submit' class='btn btn-light' value='Start Game'></form></div>";
+      echo "<p class='lead'>Game ID =  " . $game_id . "</p>";
+      echo "</div>";
     }
     else if ($game_state == 2)
     {
       echo "<div class='jumbotron'>";
       echo "<h1 class='display-4'>Game Currently In Progress</h1>";
-      echo "<p class='lead'>Game ID =  " . $game_id . "</p><p class='lead'>If you need to terminate the game early, click the button below";
-      echo "<form action='terminateGame.php' method='POST'>";
-      echo "<input type='submit' class='btn btn-light' value='Terminate Game'></form></div>";
+      echo "<p class='lead'>Game ID =  " . $game_id ;
+      echo "</div>";
     }
   }
 
@@ -118,7 +114,7 @@
         $result->free();
     }
 
-    echo "<a name='guns'></a><form action='createPlayer.html' method='GET'><input type='submit' class='btn btn-light' value='Register New Player'></form>";
+    echo "<a name='guns'></a>";
 
     echo "<hr>";
   }
@@ -158,7 +154,7 @@
 
     echo "</table><br>";
 
-    echo "<a name='games'></a><form action='registerGun.php' method='POST'><input type='submit' class='btn btn-light' value='Register New Gun'></form>";
+    echo "<a name='games'></a>";
 
     echo "<hr>";
   }
