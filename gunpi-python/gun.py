@@ -34,6 +34,7 @@ class Gun:
         username to the database.
         Postconditions: The gunid and username will be read
         into the program and validated through the database.
+        Returns: Returns the result of the validate() function
     """
     try:
       file = open('gunid', 'r+')
@@ -62,6 +63,8 @@ class Gun:
         registered then the username and id will not be validated.
         Postconditions: The gunid and username will be set within the
         database for record keeping.
+        Returns: Returns True if the input successfully validated with
+        the database, otherwise returns False.
     """
     if (self.id == 0):
       print("Gun id cannot be 0. Please open gunid.dist and follow the written instructions.")
@@ -110,6 +113,8 @@ class Gun:
         If there is a game to join, it will be joined.
         Postconditions: A game will be joined or a message will
         be displayed that there is no game to join.
+        Returns: Returns True if a game was successfully joined,
+        otherwise returns False if there was no game to join.
     """
     sql = "SELECT * FROM Games WHERE current_state = 1 OR current_state = 2"
     self.cursor.execute(sql)
@@ -133,6 +138,8 @@ class Gun:
         checkGame checks the database for an active game.
         Postconditions: If there is no active game a message will be
         displayed stating such.
+        Returns: Returns True if a game is active or joining, otherwise
+        returns False if all games are finished or inactive.
     """
     sql = ("SELECT * FROM Games "
            "WHERE current_state in (1,2)")
@@ -153,6 +160,8 @@ class Gun:
         will then end.
         Postconditions: The database is updated with the proper stats
         and the game is ended.
+        Returns: Returns True if a game loss is reported correctly,
+        otherwise returns False if there didn't exist game to be lost.
     """
     sql = ("SELECT * FROM (Games INNER JOIN Game_Users ON Games.id = Game_Users.game_id) "
            "WHERE Games.current_state = 2 AND Game_Users.gun_id <> {}").format(self.id)
