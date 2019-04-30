@@ -24,8 +24,9 @@ class Trigger:
     self.shotID = "Shot"+str(self.gun.id).zfill(2)
 
   def __del__(self):
-    GPIO.remove_event_detect(self.TRIGGER)
+    print("Delete")
     GPIO.cleanup()
+#    GPIO.remove_event_detect(self.TRIGGER)
   
   def shoot(self, pin):
     """ shoot
@@ -40,7 +41,7 @@ class Trigger:
       print(str(datetime.datetime.now()), "Shot")
       call(["irsend","SEND_ONCE","laserpi",self.shotID])
       self.gun.fireShot()
-      return true
+      return True
   
   def addTrigger(self):
     """ addTrigger

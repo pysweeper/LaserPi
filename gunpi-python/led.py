@@ -61,13 +61,8 @@ class LED():
 
 if __name__ == "__main__":
     try:
+        led = LED()
         while True:
-            led = LED()
-            led.toggleLED('red')
-            time.sleep(1)
-            led.toggleLED('red')
-            led.toggleLED('green')
-            time.sleep(1)
             led.toggleLED('red')
             led.toggleLED('green')
             time.sleep(1)
