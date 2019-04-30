@@ -24,7 +24,6 @@ class Trigger:
     self.shotID = "Shot"+str(self.gun.id).zfill(2)
 
   def __del__(self):
-    print("Delete")
     GPIO.cleanup()
 #    GPIO.remove_event_detect(self.TRIGGER)
   
