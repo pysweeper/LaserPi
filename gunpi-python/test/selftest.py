@@ -1,4 +1,5 @@
 import unittest, sys, time, datetime
+from subprocess import call
 import threading
 sys.path.append('../')
 from connect import connect
@@ -57,6 +58,8 @@ def main():
             print(("{}: Trigger detected.").format(datetime.datetime.now()))
             i += 1
     time.sleep(1)
+    print("LaserPi programmed remote codes:")
+    call(["irsend", "LIST", "laserpi", ""])
     return True
 
 def setLED(event, color, ledObject, t):
