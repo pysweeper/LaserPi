@@ -1,0 +1,17 @@
+begin
+  button=KEY_POWER
+  prog=guns
+  config=KEY_POWER
+end
+
+begin
+  button=Shot01
+  prog=guns
+  config=Shot01
+end
+
+begin
+  button=Shot02
+  prog=guns
+  config=Shot02
+end
