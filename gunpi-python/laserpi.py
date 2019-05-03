@@ -15,32 +15,44 @@ try:
   trigger.addTrigger()
   gun = Gun()
   led = LED()
-  if (!gun.readIDFile()) quit()
+  hp = 3
+  if (not gun.readIDFile()): quit()
   inGame = False
   while True:
     while not inGame:
       joined = gun.joinGame()
       if joined:
         inGame = True
+        hp = 3
       led.toggleLED('red')
       sleep(0.5)
     while inGame:
-      led.toggleLED('green')
-      led.setLED('red', 'off')
+      if hp == 3:
+        led.toggleLED('green')
+        led.setLED('red', 'off')
+      elif hp == 2:
+        led.toggleLED('green')
+        led.setLED('red', 'on')
+      else:
+        led.toggleLED('green')
+        led.toggleLED('red')
+
       code=lirc.nextcode()
       if code and code[0] != "Shot"+str(gun.id).zfill(2):
         #we got hit by something
         print(str(datetime.datetime.now()), "Got hit by " + str(code))
-        gun.loseGame()
-        led.setLED('red', 'on')
-        led.setLED('green', 'off')
-        inGame=False
+        hp -= 1
+        if hp == 0:
+            gun.loseGame()
+            led.setLED('red', 'on')
+            led.setLED('green', 'off')
+            inGame=False
       stillActive = gun.checkGame()
       if stillActive == False:
         inGame=False
         led.setLED('red', 'off')
         led.setLED('green', 'on')
       sleep(0.1)
-  
+
 finally:
   pass
